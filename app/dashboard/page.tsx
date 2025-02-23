@@ -1,7 +1,5 @@
 "use client"
 import { Box, Typography } from "@mui/material";
-import { jwtDecode } from "jwt-decode";
-import { useRouter } from "next/navigation";
 import React from "react";
 import Protected from "../protected-layout";
 
