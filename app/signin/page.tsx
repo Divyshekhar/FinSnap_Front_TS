@@ -12,6 +12,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { InputAdornment } from "@mui/material";
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
+require("dotenv").config();
 export default function signin() {
 
     const URL = "http://localhost:5000";
@@ -24,9 +25,16 @@ export default function signin() {
     const handleTogglePasswordVisibility = () => {
         setShowPassword((prev) => !prev);
     };
-    React.useEffect(() =>{
+    const props = () => {
+        <InputAdornment position="end">
+            <IconButton onClick={handleTogglePasswordVisibility}>
+                {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+            </IconButton>
+        </InputAdornment>
+    }
+    React.useEffect(() => {
         const token = localStorage.getItem('authToken');
-        if(token) router.push('/dashboard');
+        if (token) router.push('/dashboard');
 
     }, [router])
 
@@ -65,7 +73,9 @@ export default function signin() {
                     padding: "32px",
                     maxWidth: "400px",
                     width: "100%",
-                    borderRadius: '10px'
+                    borderRadius: '10px',
+                    backgroundColor: "rgb(44,44,44)",
+                    color: "white"
                 }}
                 elevation={3}
             >
@@ -83,8 +93,14 @@ export default function signin() {
                         onChange={(e) => {
                             setError("");
                             setEmail(e.target.value);
+
+                        }}
+                        slotProps={{
+                            inputLabel: { sx: { color: "grey" } },
+                            input: { sx: { color: "white" } }
                         }}
                     />
+
                     <TextField
                         placeholder="Password"
                         variant="outlined"
@@ -96,14 +112,17 @@ export default function signin() {
                             setError("");
                             setPassword(e.target.value);
                         }}
-                        InputProps={{
+                        slotProps={{
+                            inputLabel: { sx: { color: "grey" } },
+                            input: { sx: { color: "white" } ,
                             endAdornment: (
                                 <InputAdornment position="end">
                                     <IconButton onClick={handleTogglePasswordVisibility}>
                                         {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
                                     </IconButton>
                                 </InputAdornment>
-                            ),
+                            )},
+                            
                         }}
                     />
                     <Button

@@ -17,6 +17,7 @@ dotenv.config();
 export default function Signin() {
     const router = useRouter();
     const [email, setEmail] = React.useState("");
+    const [name, setName] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [showPassword, setShowPassword] = React.useState(false);
     const [error, setError] = React.useState("");
@@ -25,7 +26,7 @@ export default function Signin() {
         setShowPassword((prev) => !prev);
     };
 
-    const handleSubmit = async (e:any) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
         try {
             const response = await axios.post(`${process.env.URL_DEV}/user/signup`, {
@@ -60,7 +61,9 @@ export default function Signin() {
                     padding: "32px",
                     maxWidth: "400px",
                     width: "100%",
-                    borderRadius: '10px'
+                    borderRadius: '10px',
+                    backgroundColor: "rgb(44,44,44)",
+                    color: "white"
                 }}
                 elevation={3}
             >
@@ -69,6 +72,22 @@ export default function Signin() {
                     <Typography sx={{ fontSize: 20, fontWeight: 'bold' }}>Sign Up</Typography>
                 </Box>
                 <form onSubmit={handleSubmit} style={{ width: "100%" }}>
+                    <TextField
+                        label="Name"
+                        variant="outlined"
+                        fullWidth
+                        margin="normal"
+                        value={name}
+                        onChange={(e) => {
+                            setError("");
+                            setName(e.target.value);
+                        }}
+                        slotProps={{
+                            inputLabel: { sx: { color: "grey" } },
+                            input: { sx: { color: "white" } }
+                        }}
+
+                    />
                     <TextField
                         label="Email"
                         variant="outlined"
@@ -79,7 +98,13 @@ export default function Signin() {
                             setError("");
                             setEmail(e.target.value);
                         }}
+                        slotProps={{
+                            inputLabel: { sx: { color: "grey" } },
+                            input: { sx: { color: "white" } }
+                        }}
+
                     />
+
                     <TextField
                         label="Password"
                         variant="outlined"
@@ -91,14 +116,17 @@ export default function Signin() {
                             setError("");
                             setPassword(e.target.value);
                         }}
-                        InputProps={{
+                        slotProps={{
+                            inputLabel: { sx: { color: "grey" } },
+                            input: { sx: { color: "white" } , 
                             endAdornment: (
                                 <InputAdornment position="end">
                                     <IconButton onClick={handleTogglePasswordVisibility}>
                                         {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
                                     </IconButton>
                                 </InputAdornment>
-                            ),
+                            )},
+
                         }}
                     />
                     <Button
@@ -111,7 +139,7 @@ export default function Signin() {
                     >
                         Sign Up
                     </Button>
-                    <Button onClick={()=>{router.push('/signin')}}>Already have an account? Login Here</Button>
+                    <Button onClick={() => { router.push('/signin') }}>Already have an account? Login Here</Button>
                     {error && (
                         <Typography variant="body2" color="error" gutterBottom>
                             {error}
