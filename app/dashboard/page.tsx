@@ -50,12 +50,12 @@ export default function Dashboard() {
                     {
                         value: response1.data.total, // Extract the total expense
                         label: "Total Expense",
-                        color: "#E0D4E6",
+                        color: "#E16A54",
                     },
                     {
                         value: response2.data.total, // Extract the total expense
                         label: "Total Income",
-                        color: "red",
+                        color: "#D0E8C5",
                     }
                 ]);
             } catch (error) {
@@ -93,17 +93,17 @@ export default function Dashboard() {
                             height={300}
                             slotProps={{
                                 legend: { labelStyle: { fill: "white" } }
+
                             }}
 
                         />
                     </Grid>
                     <Grid item xs={12} md={6} sx={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
-                        <Typography variant="h4" sx={{ color: "white", fontWeight: "bold" }}>
+                        <Typography variant="h4" sx={{ color: "#FBCEB2", fontWeight: "bold" }}>
                             Welcome to FinSnap
                         </Typography>
                         <Typography variant="h6" sx={{color: "white"}}>
-                            Hi! {name}
-
+                            Hi! {name}<br/>
                         </Typography>
                     </Grid>
                 </Grid>
