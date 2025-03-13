@@ -1,42 +1,95 @@
 "use client"
-import { useState } from "react";
-import { Typography, Box, Grid, TextField, Button } from "@mui/material";
+import { useEffect, useState } from "react";
+import { Typography, Box, Grid, TextField, Button, MenuItem, Select, InputLabel, FormControl, CircularProgress } from "@mui/material";
 import Protected from "../protected-layout";
 import { PieChart } from "@mui/x-charts";
+import axios from "axios";
+
+const URL = "http://localhost:5000/income"
 
 export default function Incomes() {
+    const [incomeChartData, setIncomeChartData] = useState([]);
     const [formData, setFormData] = useState({
         title: "",
         amount: "",
-        date: "",
         category: "",
+        date: "",
         description: ""
     });
-
-    const incomeChartData = [
-        { id: 0, value: 10, label: "series A" },
-        { id: 1, value: 15, label: "series B" },
-        { id: 2, value: 20, label: "series C" },
-    ];
-
     const handleChange = (e: any) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+
+        setFormData((prev) => ({
+            ...prev,
+            [name]: name === "amount" ? Number(value) || 0 : value,  // Removed trim() to allow spaces
+        }));
     };
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
-        console.log("Submitted Data:", formData);
-        setFormData({ title: "", amount: "", date: "", category: "", description: "" }); // Reset form
+        console.log("This is form data", formData);
+
+        const token = localStorage.getItem("authToken"); // Retrieve token
+
+        if (!token) {
+            console.error("No token found. Please log in again.");
+            return;
+        }
+        try {
+            const response = await axios.post(
+                "http://localhost:5000/income/create",
+                formData,
+                {
+                    headers: {
+                        "Authorization": `Bearer ${token}`, // Add Bearer prefix
+                        "Content-Type": "application/json", // Ensure correct content type
+                    },
+                }
+            );
+
+            console.log("Form data submitted successfully", response.data);
+            fetchIncomeData();
+            setFormData({ title: "", amount: "", date: "", category: "", description: "" });
+        } catch (error: any) {
+            console.error("Error submitting form:", error.response?.data || error.message);
+        }
     };
+    const fetchIncomeData = async () => {
+        const token = await localStorage.getItem('authToken');
+        try {
+            const response = await axios.get(`${URL}/category`, {
+                headers: {
+                    "Authorization": token
+                }
+            })
+            const chartData = response.data.map((item: any, index: number) => ({
+                id: index,
+                value: item._sum.amount,
+                label: item.category
+
+            }))
+            setIncomeChartData(chartData);
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
+    useEffect(() => {
+        fetchIncomeData();
+    }, [])
+
+
+    const categories = ["Salary", "Freelance", "Investments", "Business", "Other"];
+
+
 
     return (
         <Protected>
             <Box sx={{ width: "100vw", height: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <Grid container spacing={4} sx={{ maxWidth: "80vw", alignItems: "center" }}>
-
-                    {/* Pie Chart */}
                     <Grid item xs={12} md={6} sx={{ display: "flex", justifyContent: "center" }}>
-                        <PieChart
+                        {incomeChartData.length > 0 ? <PieChart
                             series={[
                                 {
                                     data: incomeChartData,
@@ -57,10 +110,12 @@ export default function Incomes() {
                             slotProps={{
                                 legend: { labelStyle: { fill: "white" } }
                             }}
-                        />
+                        /> :
+                            <CircularProgress />
+                        }
+
                     </Grid>
 
-                    {/* Form Section */}
                     <Grid item xs={12} md={6} sx={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
                         <Typography variant="h4" sx={{ color: "#FFFFE4", fontWeight: "bold", mb: 2 }}>
                             Add Income
@@ -73,24 +128,40 @@ export default function Incomes() {
                                     input: { sx: { color: "white" } }
                                 }}
                             />
-                            <TextField label="Amount" name="amount" type="number" value={formData.amount} onChange={handleChange} fullWidth required 
+                            <TextField label="Amount" name="amount" type="number" value={formData.amount} onChange={handleChange} fullWidth required
                                 slotProps={{
                                     inputLabel: { sx: { color: "grey" } },
                                     input: { sx: { color: "white" } }
                                 }}
                             />
-                            <TextField label="" name="date" type="date" value={formData.date} onChange={handleChange} fullWidth required 
+                            <TextField label="" name="date" type="date" value={formData.date} onChange={handleChange} fullWidth
                                 slotProps={{
                                     inputLabel: { sx: { color: "grey" } },
                                     input: { sx: { color: "grey" } }
                                 }}
                             />
-                            <TextField label="Category" name="category" value={formData.category} onChange={handleChange} fullWidth required 
-                                slotProps={{
-                                    inputLabel: { sx: { color: "grey" } },
-                                    input: { sx: { color: "white" } }
-                                }}
-                            />
+
+                            {/* Category Dropdown */}
+                            <FormControl fullWidth required>
+                                <InputLabel sx={{ color: "grey" }}>Category</InputLabel>
+                                <Select
+                                    name="category"
+                                    value={formData.category}
+                                    onChange={handleChange}
+                                    sx={{
+                                        color: "white", "& .MuiSelect-icon": {
+                                            color: "grey",
+                                        }
+                                    }}
+                                >
+                                    {categories.map((category, index) => (
+                                        <MenuItem key={index} value={category} >
+                                            {category}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+
                             <TextField label="Description" name="description" multiline rows={3} value={formData.description} onChange={handleChange} fullWidth required
                                 slotProps={{
                                     inputLabel: { sx: { color: "grey" } },

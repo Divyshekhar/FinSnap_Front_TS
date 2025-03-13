@@ -1,5 +1,5 @@
 'use client'
-import { Box, Typography, Grid } from "@mui/material";
+import { Box, Typography, Grid, CircularProgress } from "@mui/material";
 import React from "react";
 import axios from 'axios';
 import Protected from "../protected-layout";
@@ -14,21 +14,22 @@ export default function Dashboard() {
     React.useEffect(() => {
         const fetchName = async () => {
             const token = await localStorage.getItem("authToken");
-            if(!token){console.error("Token not found")
+            if (!token) {
+                console.error("Token not found")
                 return
             }
-            try{
-            const response = await axios.get(`http://localhost:5000/user/info`,{
-                headers:{
-                    "Authorization": token
-                }
-            })
-            setName(response.data.user.name)
-        }catch(e){
-            console.error("Error setting name")
+            try {
+                const response = await axios.get(`http://localhost:5000/user/info`, {
+                    headers: {
+                        "Authorization": token
+                    }
+                })
+                setName(response.data.user.name)
+            } catch (e) {
+                console.error("Error setting name")
+            }
         }
-        }
-        
+
         const fetchData = async () => {
             try {
                 const token = await localStorage.getItem("authToken");
@@ -72,8 +73,7 @@ export default function Dashboard() {
             <Box sx={{ width: "100vw", height: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <Grid container spacing={4} sx={{ maxWidth: "80vw", alignItems: "center" }}>
                     <Grid item xs={12} md={6} sx={{ display: "flex", justifyContent: "center" }}>
-
-                        <PieChart
+                        {chartData.length > 0 ? <PieChart
                             series={[
                                 {
                                     data: chartData,
@@ -96,14 +96,17 @@ export default function Dashboard() {
 
                             }}
 
-                        />
+                        /> :
+                            <CircularProgress />
+                        }
+
                     </Grid>
                     <Grid item xs={12} md={6} sx={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
                         <Typography variant="h4" sx={{ color: "#FBCEB2", fontWeight: "bold" }}>
                             Welcome to FinSnap
                         </Typography>
-                        <Typography variant="h6" sx={{color: "white"}}>
-                            Hi! {name}<br/>
+                        <Typography variant="h6" sx={{ color: "white" }}>
+                            Hi! {name}<br />
                         </Typography>
                     </Grid>
                 </Grid>
