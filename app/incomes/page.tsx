@@ -111,7 +111,7 @@ export default function Incomes() {
                                 legend: { labelStyle: { fill: "white" } }
                             }}
                         /> :
-                            <CircularProgress />
+                            <CircularProgress size="3rem"/>
                         }
 
                     </Grid>

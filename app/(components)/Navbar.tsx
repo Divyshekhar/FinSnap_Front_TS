@@ -20,7 +20,6 @@ const pages = [
     { name: "Dashboard", path: "/dashboard" },
     { name: "Expenses", path: "/expenses" },
     { name: "Incomes", path: "/incomes" },
-    // { name: "", path: "/subscriptions" }
 
 ];
 
@@ -35,10 +34,9 @@ function NavBar() {
         };
 
         window.addEventListener("storage", checkAuth);
-        checkAuth(); // Check on mount
-
+        checkAuth(); 
         return () => window.removeEventListener("storage", checkAuth);
-    }, [token]);
+    }, []);
     const handleOpenNavMenu = (event: any) => {
         setAnchorElNav(event.currentTarget);
     };
@@ -49,6 +47,7 @@ function NavBar() {
     const handleSignOut = () => {
         localStorage.removeItem("authToken");
         setToken(null);
+        window.dispatchEvent(new Event("storage"));
         router.push("/");
     };
 
@@ -83,7 +82,7 @@ function NavBar() {
                             fontSize: '35px',
                             transition: 'color 0.3s ease-in-out'
                         }}
-                        onClick={() => { router.push('/dashboard') }}
+                        onClick={() => { router.push('/') }}
                     >
                         FinSnap
                     </Typography>
@@ -221,7 +220,7 @@ function NavBar() {
                                     '&:hover': { backgroundColor: 'rgba(255, 255, 255, 0.1)' },
                                 }}
                             >
-                                Register
+                                Sign up
                             </Button>
                         )}
 

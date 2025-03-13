@@ -47,6 +47,7 @@ export default function signin() {
             });
             const token = response.data.token;
             localStorage.setItem("authToken", token);
+            window.dispatchEvent(new Event("storage"));
             router.push('/dashboard');
         } catch (error) {
             if (axios.isAxiosError(error)) {
@@ -61,6 +62,7 @@ export default function signin() {
     return (
         <Box
             sx={{
+                background: 'linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%)',
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
@@ -74,7 +76,7 @@ export default function signin() {
                     maxWidth: "400px",
                     width: "100%",
                     borderRadius: '10px',
-                    backgroundColor: "rgb(44,44,44)",
+                    backgroundColor: "#1E1E1E",
                     color: "white"
                 }}
                 elevation={3}

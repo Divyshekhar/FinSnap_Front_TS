@@ -97,7 +97,7 @@ export default function Dashboard() {
                             }}
 
                         /> :
-                            <CircularProgress />
+                            <CircularProgress size="3rem" />
                         }
 
                     </Grid>

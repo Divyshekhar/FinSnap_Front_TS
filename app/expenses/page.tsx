@@ -61,7 +61,7 @@ export default function Expenses() {
             }));
             setExpenseChatData(chartData);
         } catch (e) {
-            console.error("Error occcured", e)
+            console.error("Error occcured")
         }
     }
 
@@ -96,7 +96,7 @@ export default function Expenses() {
                                 legend: { labelStyle: { fill: "white" } }
                             }}
                         /> :
-                            <CircularProgress />
+                            <CircularProgress size="3rem" />
                         }
 
                     </Grid>
