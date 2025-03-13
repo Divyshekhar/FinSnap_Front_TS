@@ -98,6 +98,7 @@ function LandingPage() {
                     background: theme.palette.primary.dark
                   }
                 }}
+                onClick={() => {router.push('/dashboard')}}
               >
                 Go to Dashboard
               </Button>

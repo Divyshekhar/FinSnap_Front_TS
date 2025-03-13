@@ -1,6 +1,6 @@
 "use client"
 import { useEffect, useState } from "react";
-import { Typography, Box, Grid, TextField, Button, MenuItem, Select, InputLabel, FormControl, CircularProgress } from "@mui/material";
+import { Typography, Box, Grid, TextField, Button, MenuItem, Select, InputLabel, FormControl, CircularProgress, Paper } from "@mui/material";
 import Protected from "../protected-layout";
 import { PieChart } from "@mui/x-charts";
 import axios from "axios";
@@ -111,72 +111,83 @@ export default function Incomes() {
                                 legend: { labelStyle: { fill: "white" } }
                             }}
                         /> :
-                            <CircularProgress size="3rem"/>
+                            <CircularProgress size="3rem" />
                         }
 
                     </Grid>
 
                     <Grid item xs={12} md={6} sx={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
-                        <Typography variant="h4" sx={{ color: "#FFFFE4", fontWeight: "bold", mb: 2 }}>
-                            Add Income
-                        </Typography>
+                        <Paper sx={{
+                            background: 'rgba(255, 255, 255, 0.05)',
+                            borderRadius: '20px',
+                            paddingTop: "12px",
+                            padding: "12px",
+                            position: "inherit",
+                            marginTop: "50px",
+                            marginLeft: "50px",
+                            marginRight: "-50px"
+                        }}>
+                            <Typography variant="h4" sx={{ color: "white", fontWeight: "bold", mb: 2, textAlign:"center" }}>
+                                Add Income
+                            </Typography>
 
-                        <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "12px", width: "100%" }}>
-                            <TextField label="Title" name="title" value={formData.title} onChange={handleChange} fullWidth required
-                                slotProps={{
-                                    inputLabel: { sx: { color: "grey" } },
-                                    input: { sx: { color: "white" } }
-                                }}
-                            />
-                            <TextField label="Amount" name="amount" type="number" value={formData.amount} onChange={handleChange} fullWidth required
-                                slotProps={{
-                                    inputLabel: { sx: { color: "grey" } },
-                                    input: { sx: { color: "white" } }
-                                }}
-                            />
-                            <TextField label="" name="date" type="date" value={formData.date} onChange={handleChange} fullWidth
-                                slotProps={{
-                                    inputLabel: { sx: { color: "grey" } },
-                                    input: { sx: { color: "grey" } }
-                                }}
-                            />
-
-                            {/* Category Dropdown */}
-                            <FormControl fullWidth required>
-                                <InputLabel sx={{ color: "grey" }}>Category</InputLabel>
-                                <Select
-                                    name="category"
-                                    value={formData.category}
-                                    onChange={handleChange}
-                                    sx={{
-                                        color: "white", "& .MuiSelect-icon": {
-                                            color: "grey",
-                                        }
+                            <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "12px", width: "100%" }}>
+                                <TextField label="Title" name="title" value={formData.title} onChange={handleChange} fullWidth required
+                                    slotProps={{
+                                        inputLabel: { sx: { color: "grey" } },
+                                        input: { sx: { color: "white" } }
                                     }}
-                                >
-                                    {categories.map((category, index) => (
-                                        <MenuItem key={index} value={category} >
-                                            {category}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
+                                />
+                                <TextField label="Amount" name="amount" type="number" value={formData.amount} onChange={handleChange} fullWidth required
+                                    slotProps={{
+                                        inputLabel: { sx: { color: "grey" } },
+                                        input: { sx: { color: "white" } }
+                                    }}
+                                />
+                                <TextField label="" name="date" type="date" value={formData.date} onChange={handleChange} fullWidth
+                                    slotProps={{
+                                        inputLabel: { sx: { color: "grey" } },
+                                        input: { sx: { color: "grey" } }
+                                    }}
+                                />
 
-                            <TextField label="Description" name="description" multiline rows={3} value={formData.description} onChange={handleChange} fullWidth required
-                                slotProps={{
-                                    inputLabel: { sx: { color: "grey" } },
-                                    input: { sx: { color: "white" } }
-                                }}
-                            />
+                                {/* Category Dropdown */}
+                                <FormControl fullWidth required>
+                                    <InputLabel sx={{ color: "grey" }}>Category</InputLabel>
+                                    <Select
+                                        name="category"
+                                        value={formData.category}
+                                        onChange={handleChange}
+                                        sx={{
+                                            color: "white", "& .MuiSelect-icon": {
+                                                color: "grey",
+                                            }
+                                        }}
+                                    >
+                                        {categories.map((category, index) => (
+                                            <MenuItem key={index} value={category} >
+                                                {category}
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>
 
-                            <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }}>
-                                Submit
-                            </Button>
-                        </form>
+                                <TextField label="Description" name="description" multiline rows={3} value={formData.description} onChange={handleChange} fullWidth required
+                                    slotProps={{
+                                        inputLabel: { sx: { color: "grey" } },
+                                        input: { sx: { color: "white" } }
+                                    }}
+                                />
+
+                                <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }}>
+                                    Submit
+                                </Button>
+                            </form>
+                        </Paper>
                     </Grid>
 
                 </Grid>
             </Box>
-        </Protected>
+        </Protected >
     );
 }
