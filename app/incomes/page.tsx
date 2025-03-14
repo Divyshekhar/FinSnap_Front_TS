@@ -21,7 +21,7 @@ export default function Incomes() {
 
         setFormData((prev) => ({
             ...prev,
-            [name]: name === "amount" ? Number(value) || 0 : value,  // Removed trim() to allow spaces
+            [name]: name === "amount" ? Number(value) || 0 : value, 
         }));
     };
 
@@ -41,8 +41,7 @@ export default function Incomes() {
                 formData,
                 {
                     headers: {
-                        "Authorization": `Bearer ${token}`, // Add Bearer prefix
-                        "Content-Type": "application/json", // Ensure correct content type
+                        "Authorization": token, // Add Bearer prefix
                     },
                 }
             );
