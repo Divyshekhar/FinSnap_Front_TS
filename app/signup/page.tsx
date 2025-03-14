@@ -26,7 +26,7 @@ export default function Signin() {
         setShowPassword((prev) => !prev);
     };
 
-    const handleSubmit = async (e: any) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
             const response = await axios.post(`${process.env.URL_DEV}/user/signup`, {

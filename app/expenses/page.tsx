@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Typography, Box, Grid, TextField, Button, FormControl, InputLabel, Select, MenuItem, CircularProgress, Paper } from "@mui/material";
 import Protected from "../protected-layout";
 import { PieChart } from "@mui/x-charts";
+import { SelectChangeEvent } from '@mui/material';
 import axios from "axios";
 import { cilBasket, cilBuilding, cilBusAlt, cilCart, cilFastfood, cilGift, cilHospital, cilPizza } from '@coreui/icons';
 import { Princess_Sofia } from 'next/font/google';
@@ -31,7 +32,7 @@ export default function Expenses() {
 
     const [expenseChartData, setExpenseChatData] = useState([]);
 
-    const handleChange = (e: any) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent<string>) => {
         const { name, value } = e.target;
 
         setFormData((prev) => ({
@@ -40,7 +41,7 @@ export default function Expenses() {
         }));
     };
 
-    const handleSubmit = async (e: any) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const token = await localStorage.getItem("authToken");
         try {
@@ -57,6 +58,12 @@ export default function Expenses() {
             console.log(e)
         }
     };
+    type ExpenseItem = {
+        category: string;
+        _sum: {
+            amount: number;
+        };
+    };
     const fetchExpenseData = async () => {
         const token = await localStorage.getItem('authToken');
         try {
@@ -65,7 +72,7 @@ export default function Expenses() {
                     "Authorization": token
                 }
             })
-            const chartData = response.data.map((item: any, index: number) => ({
+            const chartData = response.data.map((item: ExpenseItem, index: number) => ({
                 id: index,
                 value: item._sum.amount,
                 label: item.category

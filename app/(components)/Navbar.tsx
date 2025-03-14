@@ -25,7 +25,7 @@ const pages = [
 
 function NavBar() {
     const router = useRouter();
-    const [anchorElNav, setAnchorElNav] = useState(null);
+    const [anchorElNav, setAnchorElNav] = useState<HTMLElement | null>(null);
     const [show, setShow] = useState('true');
     const [token, setToken] = useState<string | null>(null);
     useEffect(() => {
@@ -34,15 +34,15 @@ function NavBar() {
         };
 
         window.addEventListener("storage", checkAuth);
-        checkAuth(); 
+        checkAuth();
         return () => window.removeEventListener("storage", checkAuth);
     }, []);
-    const handleOpenNavMenu = (event: any) => {
+    const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
     };
 
     const handleCloseNavMenu = () => {
-        setAnchorElNav(null);
+        setAnchorElNav(null);  // Set to null to close the menu
     };
     const handleSignOut = () => {
         localStorage.removeItem("authToken");
@@ -56,7 +56,7 @@ function NavBar() {
             // height: "60px",
             // backgroundColor: darkTheme?'rgb(156,39,176)':'rgba(25,118,210,1)',
             transition: 'backgroundColor 0.3s ease-in-out ,  top 0.1s ease-out',
-            top:'0px'
+            top: '0px'
         }}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>

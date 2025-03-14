@@ -1,9 +1,9 @@
 "use client"
 import { useEffect, useState } from "react";
-import { Typography, Box, Grid, TextField, Button, MenuItem, Select, InputLabel, FormControl, CircularProgress, Paper } from "@mui/material";
+import { Typography, Box, Grid, TextField, Button, MenuItem, Select, InputLabel, FormControl, CircularProgress, Paper, SelectChangeEvent } from "@mui/material";
 import Protected from "../protected-layout";
 import { PieChart } from "@mui/x-charts";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import CIcon from "@coreui/icons-react";
 import { cibFaceit, cilBasket, cilBuilding, cilBusAlt, cilCart, cilCash, cilChart, cilCoffee, cilDollar, cilGraph, cilHospital, cilPizza, cilWallet } from "@coreui/icons";
 
@@ -24,7 +24,7 @@ export default function Incomes() {
     const [businessData, setBusinessData] = useState<number>(0);
     const [investmentData, setInvestmentData] = useState<number>(0);
     const [otherData, setOtherData] = useState<number>(0);
-    const handleChange = (e: any) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent<string>) => {
         const { name, value } = e.target;
 
         setFormData((prev) => ({
@@ -57,9 +57,19 @@ export default function Incomes() {
             console.log("Form data submitted successfully", response.data);
             fetchIncomeData();
             setFormData({ title: "", amount: "", date: "", category: "", description: "" });
-        } catch (error: any) {
-            console.error("Error submitting form:", error.response?.data || error.message);
+        } catch (error: unknown) {
+            if (error instanceof AxiosError) {
+                console.error("Axios error:", error.response?.data || error.message);
+            } else {
+                console.error("Unexpected error:", error);
+            }
         }
+    };
+    type IncomesType = {
+        category: string;
+        _sum: {
+            amount: number;
+        };
     };
     const fetchIncomeData = async () => {
         const token = await localStorage.getItem('authToken');
@@ -69,7 +79,7 @@ export default function Incomes() {
                     "Authorization": token
                 }
             })
-            const chartData = response.data.map((item: any, index: number) => ({
+            const chartData = response.data.map((item: IncomesType, index: number) => ({
                 id: index,
                 value: item._sum.amount,
                 label: item.category
