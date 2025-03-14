@@ -175,7 +175,7 @@ function LandingPage() {
               }}>
                 <TrendingUp size={24} color={theme.palette.primary.main} />
               </Box>
-              <Typography variant="h6" sx={{ mb: 1, color: 'white' }}>
+                <Typography variant="h6" sx={{ mb: 1, color: 'white' }}>
                 Expense Analytics
               </Typography>
               <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
