@@ -17,17 +17,27 @@ function LandingPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const theme = useTheme();
   const router = useRouter();
+
   useEffect(() => {
-    const getToken = async () => {
+    const getToken = () => {
       const token = localStorage.getItem("authToken");
-      if (token) setIsAuthenticated(true);
-    }
+      setIsAuthenticated(!!token);
+    };
+
     getToken();
 
-  }, [])
+    const handleAuthChange = () => getToken();
+
+    window.addEventListener("storage", handleAuthChange);
+
+    return () => {
+      window.removeEventListener("storage", handleAuthChange);
+    };
+  }, []);
   return (
     <Box sx={{
       minHeight: '100vh',
+      marginTop: "30px",
       background: 'linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%)',
       py: 8
     }}>
@@ -65,7 +75,7 @@ function LandingPage() {
                       background: theme.palette.primary.dark
                     }
                   }}
-                  onClick={() => {router.push('/signin')}}
+                  onClick={() => { router.push('/signin') }}
                 >
                   Sign In
                 </Button>
@@ -80,8 +90,8 @@ function LandingPage() {
                       borderColor: 'white'
                     }
                   }}
-                  onClick={() => {router.push('/signup')}}
-                  
+                  onClick={() => { router.push('/signup') }}
+
                 >
                   Sign Up
                 </Button>
@@ -98,7 +108,7 @@ function LandingPage() {
                     background: theme.palette.primary.dark
                   }
                 }}
-                onClick={() => {router.push('/dashboard')}}
+                onClick={() => { router.push('/dashboard') }}
               >
                 Go to Dashboard
               </Button>
@@ -226,7 +236,7 @@ function LandingPage() {
             </Grid>
             <Grid item xs={12} md={4} sx={{ textAlign: 'center' }}>
               <Typography variant="h3" color="primary" sx={{ fontWeight: 'bold', mb: 1 }}>
-                10K+
+                ₹1K+
               </Typography>
               <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
                 Expenses Tracked

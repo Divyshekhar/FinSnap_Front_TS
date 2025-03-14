@@ -1,5 +1,5 @@
 'use client'
-import { Box, Typography, Grid, CircularProgress } from "@mui/material";
+import { Box, Typography, Grid, CircularProgress, Paper } from "@mui/material";
 import React from "react";
 import axios from 'axios';
 import Protected from "../protected-layout";
@@ -70,7 +70,7 @@ export default function Dashboard() {
 
     return (
         <Protected>
-            <Box sx={{ width: "100vw", height: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <Box sx={{ width: "100vw", height: "100vh", display: "flex", alignItems: "center", justifyContent: "center", marginTop: "80px" }}>
                 <Grid container spacing={4} sx={{ maxWidth: "80vw", alignItems: "center" }}>
                     <Grid item xs={12} md={6} sx={{ display: "flex", justifyContent: "center" }}>
                         {chartData.length > 0 ? <PieChart
@@ -108,6 +108,23 @@ export default function Dashboard() {
                         <Typography variant="h6" sx={{ color: "white" }}>
                             Hi! {name}<br />
                         </Typography>
+                    </Grid>
+                    <Grid item xs={12} md={12} sx={{ display: "flex", justifyContent: "center", }}>
+
+                        <Typography sx={{ color: "white", fontWeight: "bold", fontSize: "30px" }}>
+                            Overview
+                        </Typography>
+
+
+                    </Grid>
+                    <Grid item xs={12} md={12}>
+                        <Paper sx={{ background: "rgba(255, 255, 255, 0.05)", 
+                            height: "50vh", 
+                            width: "vw", borderRadius: "20px" }}>
+                            <Typography sx={{ fontSize: "20px", color: "white", textAlign: "center", paddingTop: "20px" }}>
+
+                            </Typography>
+                        </Paper>
                     </Grid>
                 </Grid>
 
