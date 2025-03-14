@@ -7,7 +7,8 @@ import axios from "axios";
 import CIcon from "@coreui/icons-react";
 import { cibFaceit, cilBasket, cilBuilding, cilBusAlt, cilCart, cilCash, cilChart, cilCoffee, cilDollar, cilGraph, cilHospital, cilPizza, cilWallet } from "@coreui/icons";
 
-const URL = "http://localhost:5000/income"
+const URL = "https://finsnap-back-ts.onrender.com/income";
+const URL_DEV = "http://localhost:5000/income";
 
 export default function Incomes() {
     const [incomeChartData, setIncomeChartData] = useState([]);
@@ -44,7 +45,7 @@ export default function Incomes() {
         }
         try {
             const response = await axios.post(
-                "http://localhost:5000/income/create",
+                `${URL}/create`,
                 formData,
                 {
                     headers: {

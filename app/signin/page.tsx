@@ -15,7 +15,8 @@ import axios from 'axios';
 require("dotenv").config();
 export default function signin() {
 
-    const URL = "http://localhost:5000";
+    const URL = "https://finsnap-back-ts.onrender.com";
+    const URL_DEV = "http://localhost:5000";
     const router = useRouter();
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");

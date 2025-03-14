@@ -8,7 +8,9 @@ import { DollarSign, Shield, TrendingDown, TrendingUp } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export default function Dashboard() {
-    const URL = "http://localhost:5000";
+    
+    const URL = "https://finsnap-back-ts.onrender.com";
+    const URL_DEV = "http://localhost:5000";
     const router = useRouter();
     const theme = useTheme();
     const [chartData, setChartData] = React.useState<{ value: number; label: string; color: string }[]>([]);
@@ -24,7 +26,7 @@ export default function Dashboard() {
                 return
             }
             try {
-                const response = await axios.get(`http://localhost:5000/user/info`, {
+                const response = await axios.get(`${URL}/user/info`, {
                     headers: {
                         "Authorization": token
                     }
@@ -38,14 +40,14 @@ export default function Dashboard() {
         const fetchData = async () => {
             try {
                 const token = await localStorage.getItem("authToken");
-                const response1 = await axios.get(`http://localhost:5000/expense/total-expense`,
+                const response1 = await axios.get(`${URL}/expense/total-expense`,
                     {
                         headers: {
                             "Authorization": token
                         }
                     }
                 )
-                const response2 = await axios.get(`http://localhost:5000/income/total-income`,
+                const response2 = await axios.get(`${URL}/income/total-income`,
                     {
                         headers: {
                             "Authorization": token

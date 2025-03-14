@@ -6,8 +6,11 @@ import Protected from "../protected-layout";
 import { PieChart } from "@mui/x-charts";
 import axios from "axios";
 import { cilBasket, cilBuilding, cilBusAlt, cilCart, cilFastfood, cilGift, cilHospital, cilPizza } from '@coreui/icons';
+import { Princess_Sofia } from 'next/font/google';
 
-const URL = "http://localhost:5000/expense"
+
+const URL = "https://finsnap-back-ts.onrender.com/expense";
+const URL_DEV = "http://localhost:5000/expense";
 
 export default function Expenses() {
     const [formData, setFormData] = useState({
