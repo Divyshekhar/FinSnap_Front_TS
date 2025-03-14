@@ -14,6 +14,7 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import dotenv from 'dotenv';
 dotenv.config();
+const URL = "https://finsnap-back-ts.onrender.com"
 export default function Signin() {
     const router = useRouter();
     const [email, setEmail] = React.useState("");
@@ -29,13 +30,15 @@ export default function Signin() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${process.env.URL_DEV}/user/signup`, {
+            const response = await axios.post(`${URL}/user/signup`, {
+                name,
                 email,
                 password
             });
+
             const token = response.data.token;
             localStorage.setItem("authToken", token);
-            router.push('/dashboard');
+            router.push('/');
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 console.error("Error signing in:", error.response?.data || error.message);
@@ -119,14 +122,16 @@ export default function Signin() {
                         }}
                         slotProps={{
                             inputLabel: { sx: { color: "grey" } },
-                            input: { sx: { color: "white" } , 
-                            endAdornment: (
-                                <InputAdornment position="end">
-                                    <IconButton onClick={handleTogglePasswordVisibility}>
-                                        {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
-                                    </IconButton>
-                                </InputAdornment>
-                            )},
+                            input: {
+                                sx: { color: "white" },
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <IconButton onClick={handleTogglePasswordVisibility}>
+                                            {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                )
+                            },
 
                         }}
                     />
