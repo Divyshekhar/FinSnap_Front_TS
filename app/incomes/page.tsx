@@ -4,6 +4,8 @@ import { Typography, Box, Grid, TextField, Button, MenuItem, Select, InputLabel,
 import Protected from "../protected-layout";
 import { PieChart } from "@mui/x-charts";
 import axios from "axios";
+import CIcon from "@coreui/icons-react";
+import { cibFaceit, cilBasket, cilBuilding, cilBusAlt, cilCart, cilCash, cilChart, cilCoffee, cilDollar, cilGraph, cilHospital, cilPizza, cilWallet } from "@coreui/icons";
 
 const URL = "http://localhost:5000/income"
 
@@ -16,12 +18,17 @@ export default function Incomes() {
         date: "",
         description: ""
     });
+    const [salaryData, setSalaryData] = useState<number>(0);
+    const [freelanceData, setFreelanceData] = useState<number>(0);
+    const [businessData, setBusinessData] = useState<number>(0);
+    const [investmentData, setInvestmentData] = useState<number>(0);
+    const [otherData, setOtherData] = useState<number>(0);
     const handleChange = (e: any) => {
         const { name, value } = e.target;
 
         setFormData((prev) => ({
             ...prev,
-            [name]: name === "amount" ? Number(value) || 0 : value, 
+            [name]: name === "amount" ? Number(value) || 0 : value,
         }));
     };
 
@@ -67,6 +74,17 @@ export default function Incomes() {
                 label: item.category
 
             }))
+            const salaryData = response.data.find((item: { category: string; }) => item.category === "Salary")?._sum.amount || 0;
+            const freelanceData = response.data.find((item: { category: string; }) => item.category === "Freelance")?._sum.amount || 0;
+            const businessData = response.data.find((item: { category: string; }) => item.category === "Business")?._sum.amount || 0;
+            const investmentData = response.data.find((item: { category: string; }) => item.category === "Investments")?._sum.amount || 0;
+            const otherData = response.data.find((item: { category: string; }) => item.category === "Other")?._sum.amount || 0;
+
+            setOtherData(otherData);
+            setInvestmentData(investmentData);
+            setBusinessData(businessData);
+            setFreelanceData(freelanceData);
+            setSalaryData(salaryData);
             setIncomeChartData(chartData);
         }
         catch (e) {
@@ -85,7 +103,7 @@ export default function Incomes() {
 
     return (
         <Protected>
-            <Box sx={{ width: "100vw", height: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <Box sx={{ width: "100vw", display: "flex", alignItems: "center", justifyContent: "center", paddingTop: "100px" }}>
                 <Grid container spacing={4} sx={{ maxWidth: "80vw", alignItems: "center" }}>
                     <Grid item xs={12} md={6} sx={{ display: "flex", justifyContent: "center" }}>
                         {incomeChartData.length > 0 ? <PieChart
@@ -126,7 +144,7 @@ export default function Incomes() {
                             marginLeft: "50px",
                             marginRight: "-50px"
                         }}>
-                            <Typography variant="h4" sx={{ color: "white", fontWeight: "bold", mb: 2, textAlign:"center" }}>
+                            <Typography variant="h4" sx={{ color: "white", fontWeight: "bold", mb: 2, textAlign: "center" }}>
                                 Add Income
                             </Typography>
 
@@ -182,6 +200,219 @@ export default function Incomes() {
                                     Submit
                                 </Button>
                             </form>
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={12} md={12} sx={{ pb: 2, display: "flex", flexDirection: "column" }}>
+                        <Paper sx={{
+                            background: "rgba(255, 255, 255, 0.05)",
+                            height: { xs: "305vh", sm: "305vh", md: "116vh" },
+                            borderRadius: "20px",
+                            paddingTop: "10px",
+                        }}>
+                            <Grid container spacing={4} sx={{ mb: 12, marginLeft: "5px", marginTop: "5px" }}>
+                                <Grid item xs={12} md={4}>
+                                    <Paper elevation={1} sx={{
+                                        width: "80%",
+                                        p: 4,
+                                        height: 290,
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        borderRadius: "20px",
+                                        cursor: "pointer",
+                                        transition: 'all 0.3s',
+                                        background: 'rgba(255, 255, 255, 0.05)',
+                                        backdropFilter: 'blur(10px)',
+                                        '&:hover': {
+                                            transform: 'translateY(-4px)',
+                                            background: 'rgba(255, 255, 255, 0.08)'
+                                        }
+                                    }}
+                                    ><Box sx={{
+                                        width: 80,
+                                        height: 80,
+                                        bgcolor: 'rgba(255, 255, 255, 0.1)',
+                                        borderRadius: 2,
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        mb: 2,
+                                    }}>
+                                            <CIcon icon={cilCash} style={{ color: "gold", width: "60px", height: "60px", padding: "7px" }} />
+                                        </Box>
+                                        <Typography variant="h6" sx={{ color: 'white', paddinTop: "10px" }}>
+                                            Salary
+                                        </Typography>
+                                        <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+                                            Total amount recieved for salary.
+                                        </Typography>
+                                        <Typography sx={{ mt: 6, justifyContent: "flex-end", color: "white", fontSize: "20px", fontWeight: "bold" }}>
+                                            ₹{salaryData.toLocaleString('en-IN')}
+                                        </Typography>
+                                    </Paper>
+                                </Grid>
+                                <Grid item xs={12} md={4}>
+                                    <Paper elevation={1} sx={{
+                                        width: "80%",
+                                        p: 4,
+                                        height: 290,
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        borderRadius: "20px",
+                                        cursor: "pointer",
+                                        transition: 'all 0.3s',
+                                        background: 'rgba(255, 255, 255, 0.05)',
+                                        backdropFilter: 'blur(10px)',
+                                        '&:hover': {
+                                            transform: 'translateY(-4px)',
+                                            background: 'rgba(255, 255, 255, 0.08)'
+                                        }
+                                    }}
+                                    ><Box sx={{
+                                        width: 80,
+                                        height: 80,
+                                        bgcolor: 'rgba(255, 255, 255, 0.1)',
+                                        borderRadius: 2,
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        mb: 2,
+                                    }}>
+                                            <CIcon icon={cilCoffee} style={{ color: "red", width: "60px", height: "60px", padding: "7px" }} />
+                                        </Box>
+                                        <Typography variant="h6" sx={{ color: 'white', paddinTop: "10px" }}>
+                                            Freelance
+                                        </Typography>
+                                        <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+                                            Total amount earned by freelancing.
+                                        </Typography>
+                                        <Typography sx={{ mt: 6, justifyContent: "flex-end", color: "white", fontSize: "20px", fontWeight: "bold" }}>
+                                            ₹{freelanceData.toLocaleString('en-IN')}
+                                        </Typography>
+                                    </Paper>
+                                </Grid>
+                                <Grid item xs={12} md={4}>
+                                    <Paper elevation={1} sx={{
+                                        width: "80%",
+                                        p: 4,
+                                        height: 290,
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        borderRadius: "20px",
+                                        cursor: "pointer",
+                                        transition: 'all 0.3s',
+                                        background: 'rgba(255, 255, 255, 0.05)',
+                                        backdropFilter: 'blur(10px)',
+                                        '&:hover': {
+                                            transform: 'translateY(-4px)',
+                                            background: 'rgba(255, 255, 255, 0.08)'
+                                        }
+                                    }}
+                                    ><Box sx={{
+                                        width: 80,
+                                        height: 80,
+                                        bgcolor: 'rgba(255, 255, 255, 0.1)',
+                                        borderRadius: 2,
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        mb: 2,
+                                    }}>
+                                            <CIcon icon={cilDollar} style={{ color: "green", width: "60px", height: "60px", padding: "7px" }} />
+                                        </Box>
+                                        <Typography variant="h6" sx={{ color: 'white', paddinTop: "10px" }}>
+                                            Business
+                                        </Typography>
+                                        <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+                                            Total amount earned by various business ventures.
+                                        </Typography>
+                                        <Typography sx={{ mt: 5, justifyContent: "flex-end", color: "white", fontSize: "20px", fontWeight: "bold" }}>
+                                            ₹{businessData.toLocaleString('en-IN')}
+                                        </Typography>
+                                    </Paper>
+                                </Grid>
+                            </Grid>
+                            <Grid container spacing={4} sx={{ mb: 12, marginLeft: "5px", marginTop: "5px" }}>
+                                <Grid item xs={12} md={4}>
+                                    <Paper elevation={1} sx={{
+                                        width: "80%",
+                                        p: 4,
+                                        height: 290,
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        borderRadius: "20px",
+                                        cursor: "pointer",
+                                        transition: 'all 0.3s',
+                                        background: 'rgba(255, 255, 255, 0.05)',
+                                        backdropFilter: 'blur(10px)',
+                                        '&:hover': {
+                                            transform: 'translateY(-4px)',
+                                            background: 'rgba(255, 255, 255, 0.08)'
+                                        }
+                                    }}
+                                    ><Box sx={{
+                                        width: 80,
+                                        height: 80,
+                                        bgcolor: 'rgba(255, 255, 255, 0.1)',
+                                        borderRadius: 2,
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        mb: 2,
+                                    }}>
+                                            <CIcon icon={cilChart} style={{ color: "gold", width: "60px", height: "60px", padding: "7px" }} />
+                                        </Box>
+                                        <Typography variant="h6" sx={{ color: 'white' }}>
+                                            Investments
+                                        </Typography>
+                                        <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+                                            Total amount earned through investments.
+                                        </Typography>
+                                        <Typography sx={{ mt: 6, justifyContent: "flex-end", color: "white", fontSize: "20px", fontWeight: "bold" }}>
+                                            ₹{investmentData.toLocaleString("en-IN")}
+                                        </Typography>
+                                    </Paper>
+                                </Grid>
+                                <Grid item xs={12} md={4}>
+                                    <Paper elevation={1} sx={{
+                                        width: "80%",
+                                        p: 4,
+                                        height: 290,
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        borderRadius: "20px",
+                                        cursor: "pointer",
+                                        transition: 'all 0.3s',
+                                        background: 'rgba(255, 255, 255, 0.05)',
+                                        backdropFilter: 'blur(10px)',
+                                        '&:hover': {
+                                            transform: 'translateY(-4px)',
+                                            background: 'rgba(255, 255, 255, 0.08)'
+                                        }
+                                    }}
+                                    ><Box sx={{
+                                        width: 80,
+                                        height: 80,
+                                        bgcolor: 'rgba(255, 255, 255, 0.1)',
+                                        borderRadius: 2,
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        mb: 2,
+                                    }}>
+                                            <CIcon icon={cilWallet} style={{ color: "green", width: "60px", height: "60px", padding: "7px" }} />
+                                        </Box>
+                                        <Typography variant="h6" sx={{ color: 'white', paddinTop: "10px" }}>
+                                            Other Income
+                                        </Typography>
+                                        <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+                                            Total amount which was spent on other things.
+                                        </Typography>
+                                        <Typography sx={{ mt: 6, justifyContent: "flex-end", color: "white", fontSize: "20px", fontWeight: "bold" }}>
+                                            ₹{otherData.toLocaleString('en-IN')}
+                                        </Typography>
+                                    </Paper>
+                                </Grid>
+                            </Grid>
                         </Paper>
                     </Grid>
 

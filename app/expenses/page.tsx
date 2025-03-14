@@ -62,7 +62,6 @@ export default function Expenses() {
                     "Authorization": token
                 }
             })
-            console.log(response.data);
             const chartData = response.data.map((item: any, index: number) => ({
                 id: index,
                 value: item._sum.amount,
@@ -96,7 +95,7 @@ export default function Expenses() {
 
     return (
         <Protected>
-            <Box sx={{ width: "100vw", display: "flex", alignItems: "center", justifyContent: "center", paddingTop: "100px", background: "#0D0D0D" }}>
+            <Box sx={{ width: "100vw", display: "flex", alignItems: "center", justifyContent: "center", paddingTop: "100px" }}>
                 <Grid container spacing={4} sx={{ maxWidth: "80vw", alignItems: "center" }}>
                     <Grid item xs={12} md={6} sx={{ display: "flex", justifyContent: "center" }}>
                         {expenseChartData.length > 0 ? <PieChart
