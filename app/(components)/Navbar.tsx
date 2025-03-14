@@ -26,7 +26,6 @@ const pages = [
 function NavBar() {
     const router = useRouter();
     const [anchorElNav, setAnchorElNav] = useState<HTMLElement | null>(null);
-    const [show, setShow] = useState('true');
     const [token, setToken] = useState<string | null>(null);
     useEffect(() => {
         const checkAuth = () => {

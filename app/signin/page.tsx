@@ -12,11 +12,9 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { InputAdornment } from "@mui/material";
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
-require("dotenv").config();
-export default function signin() {
+export default function Signin() {
 
     const URL = "https://finsnap-back-ts.onrender.com";
-    const URL_DEV = "http://localhost:5000";
     const router = useRouter();
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
@@ -26,13 +24,6 @@ export default function signin() {
     const handleTogglePasswordVisibility = () => {
         setShowPassword((prev) => !prev);
     };
-    const props = () => {
-        <InputAdornment position="end">
-            <IconButton onClick={handleTogglePasswordVisibility}>
-                {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
-            </IconButton>
-        </InputAdornment>
-    }
     React.useEffect(() => {
         const token = localStorage.getItem('authToken');
         if (token) router.push('/dashboard');

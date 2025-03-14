@@ -6,12 +6,10 @@ import Protected from "../protected-layout";
 import { PieChart } from "@mui/x-charts";
 import { SelectChangeEvent } from '@mui/material';
 import axios from "axios";
-import { cilBasket, cilBuilding, cilBusAlt, cilCart, cilFastfood, cilGift, cilHospital, cilPizza } from '@coreui/icons';
-import { Princess_Sofia } from 'next/font/google';
+import { cilBasket, cilBuilding, cilBusAlt, cilCart, cilHospital, cilPizza } from '@coreui/icons';
 
 
 const URL = "https://finsnap-back-ts.onrender.com/expense";
-const URL_DEV = "http://localhost:5000/expense";
 
 export default function Expenses() {
     const [formData, setFormData] = useState({
@@ -27,7 +25,6 @@ export default function Expenses() {
     const [transportData, setTransportData] = useState<number>(0);
     const [groceriesData, setGroceriesData] = useState<number>(0);
     const [housingData, setHousingData] = useState<number>(0);
-    const [educationData, setEducationData] = useState<number>(0);
     const [otherData, setOtherData] = useState<number>(0);
 
     const [expenseChartData, setExpenseChatData] = useState([]);
@@ -81,27 +78,25 @@ export default function Expenses() {
             const healthData = response.data.find((item: { category: string; }) => item.category === "Healthcare")?._sum.amount || 0;
             const transportData = response.data.find((item: { category: string; }) => item.category === "Transportation")?._sum.amount || 0;
             const housingData = response.data.find((item: { category: string; }) => item.category === "Housing")?._sum.amount || 0;
-            const educationData = response.data.find((item: { category: string; }) => item.category === "Education")?._sum.amount || 0;
             const otherData = response.data.find((item: { category: string; }) => item.category === "Others")?._sum.amount || 0;
             const groceriesData = response.data.find((item: { category: string; }) => item.category === "Groceries")?._sum.amount || 0;
 
             setGroceriesData(groceriesData);
             setOtherData(otherData);
             setHousingData(housingData);
-            setEducationData(educationData);
             setFoodData(foodData);
             setHealthData(healthData);
             setTransportData(transportData);
             setExpenseChatData(chartData);
         } catch (e) {
-            console.error("Error occcured")
+            console.error("Error occcured", e)
         }
     }
 
 
     useEffect(() => {
         fetchExpenseData();
-    }, [])
+    }, [fetchExpenseData])
 
     return (
         <Protected>

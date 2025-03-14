@@ -5,10 +5,9 @@ import Protected from "../protected-layout";
 import { PieChart } from "@mui/x-charts";
 import axios, { AxiosError } from "axios";
 import CIcon from "@coreui/icons-react";
-import { cibFaceit, cilBasket, cilBuilding, cilBusAlt, cilCart, cilCash, cilChart, cilCoffee, cilDollar, cilGraph, cilHospital, cilPizza, cilWallet } from "@coreui/icons";
+import { cilCash, cilChart, cilCoffee, cilDollar, cilWallet } from "@coreui/icons";
 
 const URL = "https://finsnap-back-ts.onrender.com/income";
-const URL_DEV = "http://localhost:5000/income";
 
 export default function Incomes() {
     const [incomeChartData, setIncomeChartData] = useState([]);
@@ -33,7 +32,7 @@ export default function Incomes() {
         }));
     };
 
-    const handleSubmit = async (e: any) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log("This is form data", formData);
 
@@ -105,7 +104,7 @@ export default function Incomes() {
 
     useEffect(() => {
         fetchIncomeData();
-    }, [])
+    }, [fetchIncomeData])
 
 
     const categories = ["Salary", "Freelance", "Investments", "Business", "Other"];

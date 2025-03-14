@@ -1,18 +1,16 @@
 'use client'
-import { Box, Typography, Grid, CircularProgress, Paper, useTheme } from "@mui/material";
+import { Box, Typography, Grid, CircularProgress, Paper } from "@mui/material";
 import React, { useState } from "react";
 import axios from 'axios';
 import Protected from "../protected-layout";
 import { PieChart } from '@mui/x-charts/PieChart';
-import { DollarSign, Shield, TrendingDown, TrendingUp } from "lucide-react";
+import { DollarSign, TrendingDown, TrendingUp } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export default function Dashboard() {
     
     const URL = "https://finsnap-back-ts.onrender.com";
-    const URL_DEV = "http://localhost:5000";
     const router = useRouter();
-    const theme = useTheme();
     const [chartData, setChartData] = React.useState<{ value: number; label: string; color: string }[]>([]);
     const [name, setName] = React.useState<string>("");
     const [income, setIncome] = useState<number>(0);
@@ -33,7 +31,7 @@ export default function Dashboard() {
                 })
                 setName(response.data.user.name)
             } catch (e) {
-                console.error("Error setting name")
+                console.error("Error setting name", e)
             }
         }
 
