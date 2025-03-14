@@ -1,9 +1,11 @@
 "use client"
+import { CIcon } from '@coreui/icons-react';
 import { useEffect, useState } from "react";
 import { Typography, Box, Grid, TextField, Button, FormControl, InputLabel, Select, MenuItem, CircularProgress, Paper } from "@mui/material";
 import Protected from "../protected-layout";
 import { PieChart } from "@mui/x-charts";
 import axios from "axios";
+import { cilBusAlt, cilFastfood, cilHospital } from '@coreui/icons';
 
 const URL = "http://localhost:5000/expense"
 
@@ -16,7 +18,9 @@ export default function Expenses() {
         description: ""
     });
     const categories = ["Housing", "Groceries", "Transportation", "Healthcare", "Education", "Food", "Others"];
-
+    const [foodData, setFoodData] = useState<number>(0);
+    const [healthData, setHealthData] = useState<number>(0);
+    const [transportData, setTransportData] = useState<number>(0);
 
     const [expenseChartData, setExpenseChatData] = useState([]);
 
@@ -54,16 +58,24 @@ export default function Expenses() {
                     "Authorization": token
                 }
             })
+            console.log(response.data);
             const chartData = response.data.map((item: any, index: number) => ({
                 id: index,
                 value: item._sum.amount,
                 label: item.category
             }));
+            const foodData = response.data.find((item: { category: string; }) => item.category === "Food")?._sum.amount || 0;
+            const healthData = response.data.find((item: { category: string; }) => item.category === "Healthcare")?._sum.amount || 0;
+            const transportData = response.data.find((item: { category: string; }) => item.category === "Transportation")?._sum.amount || 0;
+            setFoodData(foodData);
+            setHealthData(healthData);
+            setTransportData(transportData);
             setExpenseChatData(chartData);
         } catch (e) {
             console.error("Error occcured")
         }
     }
+
 
     useEffect(() => {
         fetchExpenseData();
@@ -71,7 +83,7 @@ export default function Expenses() {
 
     return (
         <Protected>
-            <Box sx={{ width: "100vw", height: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <Box sx={{ width: "100vw", display: "flex", alignItems: "center", justifyContent: "center", paddingTop: "100px"}}>
                 <Grid container spacing={4} sx={{ maxWidth: "80vw", alignItems: "center" }}>
                     <Grid item xs={12} md={6} sx={{ display: "flex", justifyContent: "center" }}>
                         {expenseChartData.length > 0 ? <PieChart
@@ -167,8 +179,139 @@ export default function Expenses() {
                                 </Button>
                             </form>
                         </Paper>
-                    </Grid>
 
+                    </Grid>
+                    <Grid item xs={12} md={12} sx={{ pb: 2 }}>
+                        <Paper sx={{
+                            background: "rgba(255, 255, 255, 0.05)",
+                            height: { xs: "150vh", sm: "150vh", md: "55vh" },
+                            borderRadius: "20px",
+                            paddingTop: "10px",
+                        }}>
+                            <Grid container spacing={4} sx={{ mb: 12, marginLeft: "5px", marginTop: "5px" }}>
+                                <Grid item xs={12} md={4}>
+                                    <Paper elevation={1} sx={{
+                                        width: "80%",
+                                        p: 4,
+                                        height: 290,
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        borderRadius: "20px",
+                                        cursor: "pointer",
+                                        transition: 'all 0.3s',
+                                        background: 'rgba(255, 255, 255, 0.05)',
+                                        backdropFilter: 'blur(10px)',
+                                        '&:hover': {
+                                            transform: 'translateY(-4px)',
+                                            background: 'rgba(255, 255, 255, 0.08)'
+                                        }
+                                    }}
+                                    ><Box sx={{
+                                        width: 80,
+                                        height: 80,
+                                        bgcolor: 'rgba(255, 255, 255, 0.1)',
+                                        borderRadius: 2,
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        mb: 2,
+                                    }}>
+                                            <CIcon icon={cilFastfood} style={{ color: "gold", width: "60px", height: "60px" }} />
+                                        </Box>
+                                        <Typography variant="h6" sx={{ color: 'white', paddinTop: "10px" }}>
+                                            Food Expense
+                                        </Typography>
+                                        <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+                                            Total amount which was spent on food and groceries.
+                                        </Typography>
+                                        <Typography sx={{ mt: 6, justifyContent: "flex-end", color: "white", fontSize: "20px", fontWeight: "bold" }}>
+                                            ₹{foodData.toLocaleString('en-IN')}
+                                        </Typography>
+                                    </Paper>
+                                </Grid>
+                                <Grid item xs={12} md={4}>
+                                    <Paper elevation={1} sx={{
+                                        width: "80%",
+                                        p: 4,
+                                        height: 290,
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        borderRadius: "20px",
+                                        cursor: "pointer",
+                                        transition: 'all 0.3s',
+                                        background: 'rgba(255, 255, 255, 0.05)',
+                                        backdropFilter: 'blur(10px)',
+                                        '&:hover': {
+                                            transform: 'translateY(-4px)',
+                                            background: 'rgba(255, 255, 255, 0.08)'
+                                        }
+                                    }}
+                                    ><Box sx={{
+                                        width: 80,
+                                        height: 80,
+                                        bgcolor: 'rgba(255, 255, 255, 0.1)',
+                                        borderRadius: 2,
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        mb: 2,
+                                    }}>
+                                            <CIcon icon={cilHospital} style={{ color: "red", width: "60px", height: "60px" }} />
+                                        </Box>
+                                        <Typography variant="h6" sx={{ color: 'white', paddinTop: "10px" }}>
+                                            Healthcare Expense
+                                        </Typography>
+                                        <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+                                            Total amount which was spent on healthcare.
+                                        </Typography>
+                                        <Typography sx={{ mt: 6, justifyContent: "flex-end", color: "white", fontSize: "20px", fontWeight: "bold" }}>
+                                            ₹{healthData.toLocaleString('en-IN')}
+                                        </Typography>
+                                    </Paper>
+                                </Grid>
+                                <Grid item xs={12} md={4}>
+                                    <Paper elevation={1} sx={{
+                                        width: "80%",
+                                        p: 4,
+                                        height: 290,
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        borderRadius: "20px",
+                                        cursor: "pointer",
+                                        transition: 'all 0.3s',
+                                        background: 'rgba(255, 255, 255, 0.05)',
+                                        backdropFilter: 'blur(10px)',
+                                        '&:hover': {
+                                            transform: 'translateY(-4px)',
+                                            background: 'rgba(255, 255, 255, 0.08)'
+                                        }
+                                    }}
+                                    ><Box sx={{
+                                        width: 80,
+                                        height: 80,
+                                        bgcolor: 'rgba(255, 255, 255, 0.1)',
+                                        borderRadius: 2,
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                        mb: 2,
+                                    }}>
+                                            <CIcon icon={cilBusAlt} style={{ color: "green", width: "60px", height: "60px" }} />
+                                        </Box>
+                                        <Typography variant="h6" sx={{ color: 'white', paddinTop: "10px" }}>
+                                            Transportation Expense
+                                        </Typography>
+                                        <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+                                            Total amount which was spent on transportation.
+                                        </Typography>
+                                        <Typography sx={{ mt: 6, justifyContent: "flex-end", color: "white", fontSize: "20px", fontWeight: "bold" }}>
+                                            ₹{transportData.toLocaleString('en-IN')}
+                                        </Typography>
+                                    </Paper>
+                                </Grid>
+                            </Grid>
+                        </Paper>
+                    </Grid>
                 </Grid>
             </Box>
         </Protected>

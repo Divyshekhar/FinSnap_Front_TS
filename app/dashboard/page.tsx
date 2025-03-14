@@ -129,7 +129,7 @@ export default function Dashboard() {
                     <Grid item xs={12} md={12} sx={{ pb: 2 }}>
                         <Paper sx={{
                             background: "rgba(255, 255, 255, 0.05)",
-                            height: "55vh",
+                            height: { xs: "150vh", sm: "150vh", md: "55vh" },
                             borderRadius: "20px",
                             paddingTop: "10px",
                         }}>
@@ -152,7 +152,7 @@ export default function Dashboard() {
                                             background: 'rgba(255, 255, 255, 0.08)'
                                         }
                                     }}
-                                        onClick={() => { router.push('/dashboard')}}
+                                        onClick={() => { router.push('/dashboard') }}
                                     >
                                         <Box sx={{
                                             width: 48,
@@ -197,7 +197,7 @@ export default function Dashboard() {
                                             background: 'rgba(255, 255, 255, 0.08)'
                                         }
                                     }}
-                                    onClick={() => { router.push('/incomes')}}
+                                        onClick={() => { router.push('/incomes') }}
                                     >
                                         <Box sx={{
                                             width: 48,
@@ -243,10 +243,10 @@ export default function Dashboard() {
                                         '&:hover': {
                                             transform: 'translateY(-4px)',
                                             background: 'rgba(255, 255, 255, 0.08)',
-                                            
+
                                         }
                                     }}
-                                    onClick={()=> {router.push('/expenses')}}
+                                        onClick={() => { router.push('/expenses') }}
                                     >
                                         <Box sx={{
                                             width: 48,
