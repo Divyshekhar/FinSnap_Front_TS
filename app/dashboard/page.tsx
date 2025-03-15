@@ -6,6 +6,7 @@ import Protected from "../protected-layout";
 import { PieChart } from '@mui/x-charts/PieChart';
 import { DollarSign, TrendingDown, TrendingUp } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { jwtDecode } from "jwt-decode";
 
 export default function Dashboard() {
     
@@ -24,12 +25,8 @@ export default function Dashboard() {
                 return
             }
             try {
-                const response = await axios.get(`${URL}/user/info`, {
-                    headers: {
-                        "Authorization": token
-                    }
-                })
-                setName(response.data.user.name)
+                const decodedToken = jwtDecode<{name: string, userId: string, email: string}>(token)
+                setName(decodedToken.name)
             } catch (e) {
                 console.error("Error setting name", e)
             }

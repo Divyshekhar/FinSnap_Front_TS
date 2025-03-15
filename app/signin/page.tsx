@@ -15,6 +15,7 @@ import axios from 'axios';
 export default function Signin() {
 
     const URL = "https://finsnap-back-ts.onrender.com";
+
     const router = useRouter();
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
@@ -108,15 +109,17 @@ export default function Signin() {
                         }}
                         slotProps={{
                             inputLabel: { sx: { color: "grey" } },
-                            input: { sx: { color: "white" } ,
-                            endAdornment: (
-                                <InputAdornment position="end">
-                                    <IconButton onClick={handleTogglePasswordVisibility}>
-                                        {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
-                                    </IconButton>
-                                </InputAdornment>
-                            )},
-                            
+                            input: {
+                                sx: { color: "white" },
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <IconButton onClick={handleTogglePasswordVisibility}>
+                                            {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                )
+                            },
+
                         }}
                     />
                     <Button
