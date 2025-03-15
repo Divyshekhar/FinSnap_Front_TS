@@ -14,7 +14,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Groups2Icon from "@mui/icons-material/Groups2";
 import PropTypes from 'prop-types';
-import DarkModeTwoToneIcon from '@mui/icons-material/DarkModeTwoTone';
+// import DarkModeTwoToneIcon from '@mui/icons-material/DarkModeTwoTone';
 import Link from 'next/link';
 const pages = [
     { name: "Dashboard", path: "/dashboard" },
@@ -235,7 +235,7 @@ function NavBar() {
                                     justifyContent: 'flex-end',
 
                                 }}>
-                                <DarkModeTwoToneIcon />
+                                {/* <DarkModeTwoToneIcon /> */}
                             </IconButton>
                         </Tooltip>
                     </Box>
