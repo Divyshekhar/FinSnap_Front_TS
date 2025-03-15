@@ -151,7 +151,7 @@ export default function Incomes() {
                             padding: "12px",
                             position: "inherit",
                             marginTop: "50px",
-                            marginLeft: "50px",
+                            marginLeft: "-50px",
                             marginRight: "-50px"
                         }}>
                             <Typography variant="h4" sx={{ color: "white", fontWeight: "bold", mb: 2, textAlign: "center" }}>
@@ -215,7 +215,7 @@ export default function Incomes() {
                     <Grid item xs={12} md={12} sx={{ pb: 2, display: "flex", flexDirection: "column" }}>
                         <Paper sx={{
                             background: "rgba(255, 255, 255, 0.05)",
-                            height: { xs: "305vh", sm: "305vh", md: "116vh" },
+                            height: { xs: "305vh", sm: "257vh", md: "116vh" },
                             borderRadius: "20px",
                             paddingTop: "10px",
                         }}>

@@ -139,7 +139,7 @@ export default function Expenses() {
                             padding: "12px",
                             position: "inherit",
                             marginTop: "50px",
-                            marginLeft: "50px",
+                            marginLeft: "-50px",
                             marginRight: "-50px"
                         }}>
                             <Typography variant="h4" sx={{ color: "white", fontWeight: "bold", mb: 2, textAlign: "center" }}>
