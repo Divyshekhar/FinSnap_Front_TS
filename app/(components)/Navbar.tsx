@@ -170,57 +170,22 @@ function NavBar() {
                     <Box sx={{ flexGrow: 0 }}>
                         {token ? (
                             <Button
-                                variant="contained"
-                                color="primary"
+                                variant="text"
                                 sx={{
                                     mr: 2,
                                     fontWeight: "bold",
                                     fontSize: "12px",
+                                    color: "white",
                                     letterSpacing: ".2rem",
-                                    "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" },
+                                    "&:hover": { 
+                                        backgroundColor: "rgba(255, 255, 255, 0.2)" },
                                 }}
                                 onClick={handleSignOut}
                             >
                                 Sign Out
                             </Button>
                         ) : (
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                component={Link}
-                                href="/signin"
-                                sx={{
-                                    mr: 1,
-                                    fontWeight: "bold",
-                                    fontSize: "12px",
-                                    letterSpacing: ".2rem",
-                                    "&:hover": { backgroundColor: "rgba(255, 255, 255, 0.1)" },
-                                }}
-                            >
-                                Sign In
-                            </Button>
-                        )}
-                        {token ? (
                             <></>
-                        ) : (
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                component={Link}
-                                href='/signup'
-                                sx={{
-                                    mr: 1,
-                                    // color: darkTheme?"white":"black",
-                                    fontWeight: 'bold',
-                                    fontSize: '12px',
-                                    justifyContent: 'flex-end',
-                                    letterSpacing: '.2rem',
-                                    '&:focus': { outline: 'none' },
-                                    '&:hover': { backgroundColor: 'rgba(255, 255, 255, 0.1)' },
-                                }}
-                            >
-                                Sign up
-                            </Button>
                         )}
 
 
