@@ -14,6 +14,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Groups2Icon from "@mui/icons-material/Groups2";
 import PropTypes from 'prop-types';
+import Cookies from 'js-cookie'
 // import DarkModeTwoToneIcon from '@mui/icons-material/DarkModeTwoTone';
 import Link from 'next/link';
 import axios from 'axios';
@@ -28,15 +29,10 @@ const URL = "https://finsnap-back-ts.onrender.com/user"
 function NavBar() {
     const router = useRouter();
     const [anchorElNav, setAnchorElNav] = useState<HTMLElement | null>(null);
-    const [token, setToken] = useState<string | null>(null);
+    const [token, setToken] = useState<string | null | undefined>(null);
     useEffect(() => {
-        const checkAuth = () => {
-            setToken(localStorage.getItem("authToken"));
-        };
-
-        window.addEventListener("storage", checkAuth);
-        checkAuth();
-        return () => window.removeEventListener("storage", checkAuth);
+        const cookie = Cookies.get("token");
+        setToken(cookie);
     }, []);
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -47,9 +43,7 @@ function NavBar() {
     };
     const handleSignOut = async () => {
         try {
-            await axios.post(`${URL}/logout`, {}, { withCredentials: true }); 
-            setToken(null);
-            window.dispatchEvent(new Event("storage"));
+            await axios.get(`${URL}/logout`, { withCredentials: true }); 
             router.push("/");
         } catch (error) {
             console.error("Logout failed", error);
