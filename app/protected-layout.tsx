@@ -19,6 +19,7 @@ export default function Protected({children}: {children: ReactNode}){
         }
         const decoded: JwtPayload = jwtDecode<JwtPayload>(token);
         if(decoded.exp * 1000 < Date.now()){
+            console.log(decoded)
             localStorage.removeItem('authToken');
             router.push('/signin');
         }
