@@ -11,6 +11,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { InputAdornment } from "@mui/material";
 import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
 import axios from 'axios';
 export default function Signin() {
 
@@ -25,11 +26,11 @@ export default function Signin() {
     const handleTogglePasswordVisibility = () => {
         setShowPassword((prev) => !prev);
     };
-    // React.useEffect(() => {
-    //     const token = Cookies.get('authToken');
-    //     if (token) router.push('/dashboard');
+    React.useEffect(() => {
+        const token = Cookies.get('token');
+        if (token) router.push('/dashboard');
 
-    // }, [router])
+    }, [router])
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
