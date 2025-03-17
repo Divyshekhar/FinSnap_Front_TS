@@ -9,7 +9,8 @@ import axios from "axios";
 import { cilBasket, cilBuilding, cilBusAlt, cilCart, cilHospital, cilPizza } from '@coreui/icons';
 
 
-const URL = "https://finsnap-back-ts.onrender.com/expense";
+// const URL = "https://finsnap-back-ts.onrender.com/expense";
+const URL = "http://localhost:5000/expense"
 
 export default function Expenses() {
     const [formData, setFormData] = useState({
@@ -40,13 +41,8 @@ export default function Expenses() {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const token = await localStorage.getItem("authToken");
         try {
-            const response = await axios.post(`${URL}/create`, formData, {
-                headers: {
-                    "Authorization": token
-                },
-            })
+            const response = await axios.post(`${URL}/create`, formData, { withCredentials: true })
             console.log("Form data submitted successfully", response.data)
             fetchExpenseData();
             setFormData({ title: "", amount: "", date: "", category: "", description: "" });
@@ -62,12 +58,9 @@ export default function Expenses() {
         };
     };
     const fetchExpenseData = async () => {
-        const token = await localStorage.getItem('authToken');
         try {
             const response = await axios.get(`${URL}/category`, {
-                headers: {
-                    "Authorization": token
-                }
+                withCredentials: true
             })
             const chartData = response.data.map((item: ExpenseItem, index: number) => ({
                 id: index,

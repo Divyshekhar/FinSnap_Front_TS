@@ -11,12 +11,17 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { InputAdornment } from "@mui/material";
 import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
 import axios from 'axios';
+import { useAuth } from '../(context)/authContext';
 export default function Signin() {
 
-    const URL = "https://finsnap-back-ts.onrender.com";
+    // const URL = "https://finsnap-back-ts.onrender.com";
+    const URL = "http://localhost:5000";
 
     const router = useRouter();
+    // const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+    const {isAuthenticated, setIsAuthenticated} = useAuth();
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [showPassword, setShowPassword] = React.useState(false);
@@ -25,11 +30,10 @@ export default function Signin() {
     const handleTogglePasswordVisibility = () => {
         setShowPassword((prev) => !prev);
     };
-    React.useEffect(() => {
-        const token = localStorage.getItem('authToken');
-        if (token) router.push('/dashboard');
+    // React.useEffect(() => {
+    //     // if (token) router.push('/dashboard');
 
-    }, [router])
+    // }, [router])
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -37,12 +41,12 @@ export default function Signin() {
             const response = await axios.post(`${URL}/user/signin`, {
                 email,
                 password
-            });
-            const token = response.data.token;
-            localStorage.setItem("authToken", token);
-            window.dispatchEvent(new Event("storage"));
+            }, {withCredentials: true});
+            console.log("this is response", response)
+            setIsAuthenticated(true)
             router.push('/dashboard');
         } catch (error) {
+            console.log(error)
             if (axios.isAxiosError(error)) {
                 console.error("Error signing in:", error.response?.data || error.message);
                 setError("Please enter correct credentials");
