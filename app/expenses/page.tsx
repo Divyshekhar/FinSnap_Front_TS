@@ -96,7 +96,7 @@ export default function Expenses() {
 
     useEffect(() => {
         fetchExpenseData();
-    }, [fetchExpenseData])
+    }, [])
 
     return (
         <Protected>
