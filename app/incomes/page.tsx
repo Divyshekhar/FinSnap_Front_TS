@@ -7,8 +7,8 @@ import axios, { AxiosError } from "axios";
 import CIcon from "@coreui/icons-react";
 import { cilCash, cilChart, cilCoffee, cilDollar, cilWallet } from "@coreui/icons";
 
-const URL = "https://finsnap-back-ts.onrender.com/income";
-
+// const URL = "https://finsnap-back-ts.onrender.com/income";
+const URL = "http://localhost:5000/income"
 export default function Incomes() {
     const [incomeChartData, setIncomeChartData] = useState([]);
     const [formData, setFormData] = useState({
@@ -61,7 +61,7 @@ export default function Incomes() {
     };
     const fetchIncomeData = async () => {
         try {
-            const response = await axios.get("https://finsnap-back-ts.onrender.com/expense/category", { withCredentials: true })
+            const response = await axios.get("http://localhost:5000/expense/category", { withCredentials: true })
             const chartData = response.data.map((item: IncomesType, index: number) => ({
                 id: index,
                 value: item._sum.amount,

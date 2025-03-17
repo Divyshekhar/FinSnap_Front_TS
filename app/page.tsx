@@ -11,6 +11,7 @@ import {
   useTheme
 } from '@mui/material';
 import { useRouter } from 'next/navigation';
+import axios from 'axios';
 
 
 function LandingPage() {
@@ -18,19 +19,14 @@ function LandingPage() {
   const theme = useTheme();
   const router = useRouter();
 
+  const getCookie = async() => {
+    const response = await axios.get("http://localhost:5000/user/token", {withCredentials: true})
+    if(response){
+      setIsAuthenticated(true);
+    }
+  }
   useEffect(() => {
-    const getCookie = (name: string) => {
-      return document.cookie
-        .split("; ")
-        .find((row) => row.startsWith(`${name}=`))
-        ?.split("=")[1] || null;
-    };
-    const checkAuth = () => {
-      const token = getCookie("token");
-      console.log("Token:", token); // Debugging
-      setIsAuthenticated(!!token);
-    };
-    checkAuth();
+    getCookie();
   }, []);
   return (
     <Box sx={{

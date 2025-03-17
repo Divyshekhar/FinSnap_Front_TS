@@ -13,11 +13,15 @@ import { InputAdornment } from "@mui/material";
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import { useAuth } from '../(context)/authContext';
 export default function Signin() {
 
-    const URL = "https://finsnap-back-ts.onrender.com";
+    // const URL = "https://finsnap-back-ts.onrender.com";
+    const URL = "http://localhost:5000";
 
     const router = useRouter();
+    // const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+    const {isAuthenticated, setIsAuthenticated} = useAuth();
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [showPassword, setShowPassword] = React.useState(false);
@@ -26,11 +30,10 @@ export default function Signin() {
     const handleTogglePasswordVisibility = () => {
         setShowPassword((prev) => !prev);
     };
-    React.useEffect(() => {
-        const token = Cookies.get('token');
-        if (token) router.push('/dashboard');
+    // React.useEffect(() => {
+    //     // if (token) router.push('/dashboard');
 
-    }, [router])
+    // }, [router])
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -40,6 +43,7 @@ export default function Signin() {
                 password
             }, {withCredentials: true});
             console.log("this is response", response)
+            setIsAuthenticated(true)
             router.push('/dashboard');
         } catch (error) {
             console.log(error)

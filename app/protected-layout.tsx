@@ -1,7 +1,9 @@
 import { jwtDecode } from "jwt-decode";
 import { useRouter } from "next/navigation";
-import { useEffect, ReactNode } from "react";
+import { useEffect, ReactNode, useState } from "react";
 import Cookies from 'js-cookie';
+import axios from "axios";
+import { useAuth } from "./(context)/authContext";
 type JwtPayload = {
     userId: string,
     email: string,
@@ -9,19 +11,30 @@ type JwtPayload = {
     exp: number
 }
 
-export default function Protected({children}: {children: ReactNode}){
+export default function Protected({ children }: { children: ReactNode }) {
     const router = useRouter();
-    useEffect(()=>{
-        const token = Cookies.get("token");
-        if(!token){
-            router.push('/signin');
-            return;
+    // const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const { isAuthenticated, setIsAuthenticated } = useAuth();
+    const getCookie = async() => {
+        const response = await axios.get("http://localhost:5000/user/token", {withCredentials: true})
+        if(response){
+            setIsAuthenticated(true)
         }
-        const decoded: JwtPayload = jwtDecode<JwtPayload>(token);
-        if(decoded.exp * 1000 < Date.now()){
-            Cookies.remove('token');
-            router.push('/signin');
+        // if(!isAuthenticated)
+        // {
+        //     router.push('/signin')
+        // }
+        
+    }
+    const checkAuth = () => {
+        if(!isAuthenticated){
+            router.push('/signin')
         }
-    }, [router])
-    return<>{children}</>
+    }
+    useEffect(() => {
+      getCookie()
+      checkAuth()
+    }, []);
+
+    return <>{children}</>
 }

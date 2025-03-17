@@ -9,7 +9,8 @@ import axios from "axios";
 import { cilBasket, cilBuilding, cilBusAlt, cilCart, cilHospital, cilPizza } from '@coreui/icons';
 
 
-const URL = "https://finsnap-back-ts.onrender.com/expense";
+// const URL = "https://finsnap-back-ts.onrender.com/expense";
+const URL = "http://localhost:5000/expense"
 
 export default function Expenses() {
     const [formData, setFormData] = useState({

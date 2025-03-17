@@ -7,12 +7,13 @@ import { PieChart } from '@mui/x-charts/PieChart';
 import { DollarSign, TrendingDown, TrendingUp } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
-import Cookies from 'js-cookie';
+import { RepeatOneSharp } from "@mui/icons-material";
 
 
 export default function Dashboard() {
 
-    const URL = "https://finsnap-back-ts.onrender.com";
+    // const URL = "https://finsnap-back-ts.onrender.com";
+    const URL = "http://localhost:5000"
     const router = useRouter();
     const [chartData, setChartData] = React.useState<{ value: number; label: string; color: string }[]>([]);
     const [name, setName] = React.useState<string>("");
@@ -22,8 +23,9 @@ export default function Dashboard() {
     React.useEffect(() => {
         const fetchName = async () => {
 
-            const token = await Cookies.get("token");
-            if (!token) {
+            const response  = await axios.get("http://localhost:5000/user/token", {withCredentials: true});
+            const token : string =  response.data.token
+            if (!response) {
                 console.error("Token not found")
                 return
             }
