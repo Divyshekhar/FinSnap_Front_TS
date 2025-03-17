@@ -20,15 +20,12 @@ export default function Protected({ children }: { children: ReactNode }) {
         if(response){
             setIsAuthenticated(true)
         }
-        // if(!isAuthenticated)
-        // {
-        //     router.push('/signin')
-        // }
-        
-    }
-    const checkAuth = () => {
-        if(!isAuthenticated){
-            router.push('/signin')
+
+        const decoded: JwtPayload = jwtDecode<JwtPayload>(token);
+        if(decoded.exp * 1000 < Date.now()){
+            console.log(decoded)
+            localStorage.removeItem('authToken');
+            router.push('/signin'); 
         }
     }
     useEffect(() => {
