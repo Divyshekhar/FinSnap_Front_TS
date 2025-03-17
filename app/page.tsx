@@ -19,20 +19,18 @@ function LandingPage() {
   const router = useRouter();
 
   useEffect(() => {
-    const getToken = () => {
-      const token = localStorage.getItem("authToken");
+    const getCookie = (name: string) => {
+      return document.cookie
+        .split("; ")
+        .find((row) => row.startsWith(`${name}=`))
+        ?.split("=")[1] || null;
+    };
+    const checkAuth = () => {
+      const token = getCookie("token");
+      console.log("Token:", token); // Debugging
       setIsAuthenticated(!!token);
     };
-
-    getToken();
-
-    const handleAuthChange = () => getToken();
-
-    window.addEventListener("storage", handleAuthChange);
-
-    return () => {
-      window.removeEventListener("storage", handleAuthChange);
-    };
+    checkAuth();
   }, []);
   return (
     <Box sx={{
@@ -175,7 +173,7 @@ function LandingPage() {
               }}>
                 <TrendingUp size={24} color={theme.palette.primary.main} />
               </Box>
-                <Typography variant="h6" sx={{ mb: 1, color: 'white' }}>
+              <Typography variant="h6" sx={{ mb: 1, color: 'white' }}>
                 Expense Analytics
               </Typography>
               <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>

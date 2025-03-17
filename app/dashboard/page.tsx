@@ -7,9 +7,11 @@ import { PieChart } from '@mui/x-charts/PieChart';
 import { DollarSign, TrendingDown, TrendingUp } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
+import Cookies from 'js-cookie';
+
 
 export default function Dashboard() {
-    
+
     const URL = "https://finsnap-back-ts.onrender.com";
     const router = useRouter();
     const [chartData, setChartData] = React.useState<{ value: number; label: string; color: string }[]>([]);
@@ -19,13 +21,14 @@ export default function Dashboard() {
 
     React.useEffect(() => {
         const fetchName = async () => {
-            const token = await localStorage.getItem("authToken");
+
+            const token = await Cookies.get("token");
             if (!token) {
                 console.error("Token not found")
                 return
             }
             try {
-                const decodedToken = jwtDecode<{name: string, userId: string, email: string}>(token)
+                const decodedToken = jwtDecode<{ name: string, userId: string, email: string }>(token)
                 setName(decodedToken.name)
             } catch (e) {
                 console.error("Error setting name", e)
@@ -34,21 +37,8 @@ export default function Dashboard() {
 
         const fetchData = async () => {
             try {
-                const token = await localStorage.getItem("authToken");
-                const response1 = await axios.get(`${URL}/expense/total-expense`,
-                    {
-                        headers: {
-                            "Authorization": token
-                        }
-                    }
-                )
-                const response2 = await axios.get(`${URL}/income/total-income`,
-                    {
-                        headers: {
-                            "Authorization": token
-                        }
-                    }
-                )
+                const response1 = await axios.get(`${URL}/expense/total-expense`, { withCredentials: true });
+                const response2 = await axios.get(`${URL}/income/total-income`, { withCredentials: true });
                 setChartData([
                     {
                         value: response1.data.total, // Extract the total expense

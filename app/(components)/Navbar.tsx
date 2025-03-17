@@ -16,12 +16,14 @@ import Groups2Icon from "@mui/icons-material/Groups2";
 import PropTypes from 'prop-types';
 // import DarkModeTwoToneIcon from '@mui/icons-material/DarkModeTwoTone';
 import Link from 'next/link';
+import axios from 'axios';
 const pages = [
     { name: "Dashboard", path: "/dashboard" },
     { name: "Expenses", path: "/expenses" },
     { name: "Incomes", path: "/incomes" },
 
 ];
+const URL = "https://finsnap-back-ts.onrender.com/user"
 
 function NavBar() {
     const router = useRouter();
@@ -43,12 +45,17 @@ function NavBar() {
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);  // Set to null to close the menu
     };
-    const handleSignOut = () => {
-        localStorage.removeItem("authToken");
-        setToken(null);
-        window.dispatchEvent(new Event("storage"));
-        router.push("/");
+    const handleSignOut = async () => {
+        try {
+            await axios.post(`${URL}/logout`, {}, { withCredentials: true }); 
+            setToken(null);
+            window.dispatchEvent(new Event("storage"));
+            router.push("/");
+        } catch (error) {
+            console.error("Logout failed", error);
+        }
     };
+    
 
     return (
         <AppBar position="fixed" sx={{
