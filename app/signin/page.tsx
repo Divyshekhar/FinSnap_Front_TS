@@ -11,8 +11,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { InputAdornment } from "@mui/material";
 import { useRouter } from 'next/navigation';
-import axios, { AxiosError } from 'axios';
-import Cookies from 'js-cookie';
+import axios from 'axios';
 export default function Signin() {
 
     const URL = "https://finsnap-back-ts.onrender.com";
