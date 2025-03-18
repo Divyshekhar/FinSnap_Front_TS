@@ -7,8 +7,8 @@ import axios, { AxiosError } from "axios";
 import CIcon from "@coreui/icons-react";
 import { cilCash, cilChart, cilCoffee, cilDollar, cilWallet } from "@coreui/icons";
 
-// const URL = "https://finsnap-back-ts.onrender.com/income";
-const URL = "http://localhost:5000/income"
+const URL = "https://finsnap-back-ts.onrender.com/income";
+
 export default function Incomes() {
     const [incomeChartData, setIncomeChartData] = useState([]);
     const [formData, setFormData] = useState({
@@ -35,11 +35,22 @@ export default function Incomes() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log("This is form data", formData);
+
+        const token = localStorage.getItem("authToken"); // Retrieve token
+
+        if (!token) {
+            console.error("No token found. Please log in again.");
+            return;
+        }
         try {
             const response = await axios.post(
                 `${URL}/create`,
                 formData,
-                { withCredentials: true }
+                {
+                    headers: {
+                        "Authorization": token, // Add Bearer prefix
+                    },
+                }
             );
 
             console.log("Form data submitted successfully", response.data);
@@ -60,8 +71,13 @@ export default function Incomes() {
         };
     };
     const fetchIncomeData = async () => {
+        const token = await localStorage.getItem('authToken');
         try {
-            const response = await axios.get("http://localhost:5000/expense/category", { withCredentials: true })
+            const response = await axios.get(`${URL}/category`, {
+                headers: {
+                    "Authorization": token
+                }
+            })
             const chartData = response.data.map((item: IncomesType, index: number) => ({
                 id: index,
                 value: item._sum.amount,
@@ -88,7 +104,7 @@ export default function Incomes() {
 
     useEffect(() => {
         fetchIncomeData();
-    }, [])
+    }, [fetchIncomeData])
 
 
     const categories = ["Salary", "Freelance", "Investments", "Business", "Other"];

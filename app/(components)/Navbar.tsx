@@ -16,32 +16,26 @@ import Groups2Icon from "@mui/icons-material/Groups2";
 import PropTypes from 'prop-types';
 // import DarkModeTwoToneIcon from '@mui/icons-material/DarkModeTwoTone';
 import Link from 'next/link';
-import axios from 'axios';
-import { useAuth } from '../(context)/authContext';
 const pages = [
     { name: "Dashboard", path: "/dashboard" },
     { name: "Expenses", path: "/expenses" },
     { name: "Incomes", path: "/incomes" },
 
 ];
-// const URL = "https://finsnap-back-ts.onrender.com/user"
-const URL = "http://localhost:5000/user"
 
 function NavBar() {
     const router = useRouter();
     const [anchorElNav, setAnchorElNav] = useState<HTMLElement | null>(null);
-    // const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const { isAuthenticated, setIsAuthenticated } = useAuth();
-    const getCookie = async () => {
-        const response = await axios.get("http://localhost:5000/user/token", { withCredentials: true })
-        if (response) {
-            setIsAuthenticated(true);
-        }
-        else { }
-    }
+    const [token, setToken] = useState<string | null>(null);
     useEffect(() => {
-        getCookie();
-    }, [router]);
+        const checkAuth = () => {
+            setToken(localStorage.getItem("authToken"));
+        };
+
+        window.addEventListener("storage", checkAuth);
+        checkAuth();
+        return () => window.removeEventListener("storage", checkAuth);
+    }, []);
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
     };
@@ -49,16 +43,12 @@ function NavBar() {
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);  // Set to null to close the menu
     };
-    const handleSignOut = async () => {
-        try {
-            await axios.post(`${URL}/logout`, {}, { withCredentials: true });
-            setIsAuthenticated(false)
-            router.push("/");
-        } catch (error) {
-            console.error("Logout failed", error);
-        }
+    const handleSignOut = () => {
+        localStorage.removeItem("authToken");
+        setToken(null);
+        window.dispatchEvent(new Event("storage"));
+        router.push("/");
     };
-
 
     return (
         <AppBar position="fixed" sx={{
@@ -178,7 +168,7 @@ function NavBar() {
                         ))}
                     </Box>
                     <Box sx={{ flexGrow: 0 }}>
-                        {isAuthenticated ? (
+                        {token ? (
                             <Button
                                 variant="text"
                                 sx={{
@@ -187,9 +177,8 @@ function NavBar() {
                                     fontSize: "12px",
                                     color: "white",
                                     letterSpacing: ".2rem",
-                                    "&:hover": {
-                                        backgroundColor: "rgba(255, 255, 255, 0.2)"
-                                    },
+                                    "&:hover": { 
+                                        backgroundColor: "rgba(255, 255, 255, 0.2)" },
                                 }}
                                 onClick={handleSignOut}
                             >
