@@ -104,7 +104,7 @@ export default function Incomes() {
 
     useEffect(() => {
         fetchIncomeData();
-    }, [fetchIncomeData])
+    }, [])
 
 
     const categories = ["Salary", "Freelance", "Investments", "Business", "Other"];
