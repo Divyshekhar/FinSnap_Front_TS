@@ -7,14 +7,15 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import EditModal from "./EditModal"; // ✅ Import the Edit Modal
+import EditModal, { Transaction } from "./EditModal"; // ✅ Import the Edit Modal
 
 const URL = "https://finsnap-back-ts.onrender.com/income";
+
 export default function Category() {
 
   const [category, setCategory] = useState<string>("");
-  const [transactions, setTransactions] = useState<any[]>([]);
-  const [selectedTransaction, setSelectedTransaction] = useState<any>(null);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [selectedTransaction, setSelectedTransaction] = useState<Transaction>();
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const params = useParams<{ category: string }>();
 
@@ -36,8 +37,7 @@ export default function Category() {
       console.error("Error fetching category:", error);
     }
   };
-
-  const handleEdit = (transaction: any) => {
+  const handleEdit = (transaction: Transaction) => {
     setSelectedTransaction(transaction);
     setEditModalOpen(true);
   };
@@ -55,8 +55,8 @@ export default function Category() {
       console.error("Error deleting transaction:", error);
     }
   };
-
-  const updateTransaction = (updatedTransaction: any) => {
+  
+  const updateTransaction = (updatedTransaction: Transaction) => {
     setTransactions((prev) =>
       prev.map((t) => (t.id === updatedTransaction.id ? updatedTransaction : t))
     );

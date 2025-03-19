@@ -6,7 +6,6 @@ import { PieChart } from "@mui/x-charts";
 import axios, { AxiosError } from "axios";
 import CIcon from "@coreui/icons-react";
 import { cilCash, cilChart, cilCoffee, cilDollar, cilWallet } from "@coreui/icons";
-import { Router } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 const URL = "https://finsnap-back-ts.onrender.com/income";

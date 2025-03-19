@@ -2,11 +2,18 @@ import { useState } from "react";
 import { Box, Button, Modal, TextField, Typography } from "@mui/material";
 import axios from "axios";
 
+export interface Transaction {
+  id: string;
+  title: string;
+  amount: number;
+  date: string; // You can change this to `Date` if it's already converted
+}
+
 interface EditModalProps {
   open: boolean;
   handleClose: () => void;
-  transaction: any;
-  updateTransaction: (updatedTransaction: any) => void;
+  transaction: Transaction;
+  updateTransaction: (updatedTransaction: Transaction) => void;
 }
 const URL = "https://finsnap-back-ts.onrender.com/expense";
 
@@ -16,7 +23,7 @@ const EditModal = ({ open, handleClose, transaction, updateTransaction }: EditMo
 
   const handleSave = async () => {
     try {
-      const updatedTransaction = { ...transaction, title, amount };
+      const updatedTransaction = { ...transaction, title,  amount: Number(transaction.amount) };
       await axios.put(`${URL}/${transaction.id}`, updatedTransaction, {
         headers: { Authorization: localStorage.getItem("authToken") },
       });
