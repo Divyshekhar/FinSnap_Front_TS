@@ -6,11 +6,14 @@ import { PieChart } from "@mui/x-charts";
 import axios, { AxiosError } from "axios";
 import CIcon from "@coreui/icons-react";
 import { cilCash, cilChart, cilCoffee, cilDollar, cilWallet } from "@coreui/icons";
+import { Router } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const URL = "https://finsnap-back-ts.onrender.com/income";
 
 export default function Incomes() {
     const [incomeChartData, setIncomeChartData] = useState([]);
+    const router = useRouter();
     const [formData, setFormData] = useState({
         title: "",
         amount: "",
@@ -237,6 +240,9 @@ export default function Incomes() {
                                             background: 'rgba(255, 255, 255, 0.08)'
                                         }
                                     }}
+                                    onClick={() => {
+                                        router.push('/incomes/category/salary')
+                                    }}
                                     ><Box sx={{
                                         width: 80,
                                         height: 80,
@@ -246,7 +252,8 @@ export default function Incomes() {
                                         alignItems: 'center',
                                         justifyContent: 'center',
                                         mb: 2,
-                                    }}>
+                                    }}
+                                    >
                                             <CIcon icon={cilCash} style={{ color: "gold", width: "60px", height: "60px", padding: "7px" }} />
                                         </Box>
                                         <Typography variant="h6" sx={{ color: 'white', paddinTop: "10px" }}>
@@ -276,6 +283,9 @@ export default function Incomes() {
                                             transform: 'translateY(-4px)',
                                             background: 'rgba(255, 255, 255, 0.08)'
                                         }
+                                    }}
+                                    onClick={() => {
+                                        router.push('/incomes/category/freelance')
                                     }}
                                     ><Box sx={{
                                         width: 80,
@@ -316,6 +326,9 @@ export default function Incomes() {
                                             transform: 'translateY(-4px)',
                                             background: 'rgba(255, 255, 255, 0.08)'
                                         }
+                                    }}
+                                    onClick={() => {
+                                        router.push('/incomes/category/business')
                                     }}
                                     ><Box sx={{
                                         width: 80,
@@ -359,6 +372,9 @@ export default function Incomes() {
                                             background: 'rgba(255, 255, 255, 0.08)'
                                         }
                                     }}
+                                    onClick={() => {
+                                        router.push('/incomes/category/investments')
+                                    }}
                                     ><Box sx={{
                                         width: 80,
                                         height: 80,
@@ -398,6 +414,9 @@ export default function Incomes() {
                                             transform: 'translateY(-4px)',
                                             background: 'rgba(255, 255, 255, 0.08)'
                                         }
+                                    }}
+                                    onClick={() => {
+                                        router.push('/incomes/category/other')
                                     }}
                                     ><Box sx={{
                                         width: 80,
