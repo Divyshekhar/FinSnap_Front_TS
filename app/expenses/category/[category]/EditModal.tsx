@@ -24,7 +24,7 @@ const EditModal = ({ open, handleClose, transaction, updateTransaction }: EditMo
   const handleSave = async () => {
     const updatedTransaction = { ...transaction, title, amount: Number(amount) };
     try {
-      const response = await axios.put(`${URL}/${transaction.id}`, updatedTransaction, {
+      await axios.put(`${URL}/${transaction.id}`, updatedTransaction, {
         headers: { Authorization: localStorage.getItem("authToken") },
       });
 
