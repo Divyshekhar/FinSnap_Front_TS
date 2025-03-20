@@ -57,10 +57,16 @@ export default function Category() {
   };
   
   const updateTransaction = (updatedTransaction: Transaction) => {
-    setTransactions((prev) =>
-      prev.map((t) => (t.id === updatedTransaction.id ? updatedTransaction : t))
+    setTransactions((prevTransactions) =>
+      prevTransactions.map((transaction) =>
+        transaction.id === updatedTransaction.id ? updatedTransaction : transaction
+      )
     );
+  
+    // Close the modal after updating the transaction
+    setEditModalOpen(false);
   };
+  
 
   return (
     <Protected>

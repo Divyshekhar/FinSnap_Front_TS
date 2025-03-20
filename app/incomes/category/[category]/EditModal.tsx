@@ -16,6 +16,7 @@ interface EditModalProps {
   updateTransaction: (updatedTransaction: Transaction) => void;
 }
 const URL = "https://finsnap-back-ts.onrender.com/income";
+// const URL = "http://localhost:5000/income";
 
 
 const EditModal = ({ open, handleClose, transaction, updateTransaction }: EditModalProps) => {
@@ -23,14 +24,14 @@ const EditModal = ({ open, handleClose, transaction, updateTransaction }: EditMo
   const [amount, setAmount] = useState(transaction?.amount || "");
 
   const handleSave = async () => {
+    const updatedTransaction = { ...transaction, title, amount: Number(amount) };
     try {
-      const updatedTransaction = { ...transaction, title, amount: Number(transaction.amount) };
-      await axios.put(`${URL}/${transaction.id}`, updatedTransaction, {
+      const response = await axios.put(`${URL}/${transaction.id}`, updatedTransaction, {
         headers: { Authorization: localStorage.getItem("authToken") },
       });
 
-      updateTransaction(updatedTransaction); // ✅ Update UI with new transaction data
-      handleClose(); // Close modal
+      updateTransaction(updatedTransaction); 
+      handleClose(); 
     } catch (error) {
       console.error("Error updating transaction:", error);
     }
