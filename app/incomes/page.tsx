@@ -30,7 +30,7 @@ export default function Incomes() {
 
         setFormData((prev) => ({
             ...prev,
-            [name]: name === "amount" ? Number(value) || 0 : value,
+            [name]: name === "amount" ? Number(value) : value,
         }));
     };
 

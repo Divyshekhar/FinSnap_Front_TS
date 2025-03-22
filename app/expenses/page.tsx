@@ -10,7 +10,8 @@ import { cilBasket, cilBuilding, cilBusAlt, cilCart, cilHospital, cilPizza } fro
 import { useRouter } from 'next/navigation';
 
 
-const URL = "https://finsnap-back-ts.onrender.com/expense";
+// const URL = "https://finsnap-back-ts.onrender.com/expense";
+const URL = "http://localhost:5000/expense";
 
 export default function Expenses() {
     const router = useRouter();
@@ -36,7 +37,8 @@ export default function Expenses() {
 
         setFormData((prev) => ({
             ...prev,
-            [name]: name === "amount" ? Number(value) || 0 : value,  // Removed trim() to allow spaces
+            [name]: name === "amount" ? Number(value) : value,  // Removed trim() to allow spaces
+    
         }));
     };
 
@@ -225,9 +227,9 @@ export default function Expenses() {
                                             background: 'rgba(255, 255, 255, 0.08)'
                                         }
                                     }}
-                                    onClick={() => {
-                                        router.push('/expenses/category/food')
-                                    }}
+                                        onClick={() => {
+                                            router.push('/expenses/category/food')
+                                        }}
                                     ><Box sx={{
                                         width: 80,
                                         height: 80,
@@ -268,9 +270,9 @@ export default function Expenses() {
                                             background: 'rgba(255, 255, 255, 0.08)'
                                         }
                                     }}
-                                    onClick={() => {
-                                        router.push('/expenses/category/healthcare')
-                                    }}
+                                        onClick={() => {
+                                            router.push('/expenses/category/healthcare')
+                                        }}
                                     ><Box sx={{
                                         width: 80,
                                         height: 80,
@@ -311,9 +313,9 @@ export default function Expenses() {
                                             background: 'rgba(255, 255, 255, 0.08)'
                                         }
                                     }}
-                                    onClick={() => {
-                                        router.push('/expenses/category/transportation')
-                                    }}
+                                        onClick={() => {
+                                            router.push('/expenses/category/transportation')
+                                        }}
                                     ><Box sx={{
                                         width: 80,
                                         height: 80,
@@ -356,9 +358,9 @@ export default function Expenses() {
                                             background: 'rgba(255, 255, 255, 0.08)'
                                         }
                                     }}
-                                    onClick={() => {
-                                        router.push('/expenses/category/groceries')
-                                    }}
+                                        onClick={() => {
+                                            router.push('/expenses/category/groceries')
+                                        }}
                                     ><Box sx={{
                                         width: 80,
                                         height: 80,
@@ -399,9 +401,9 @@ export default function Expenses() {
                                             background: 'rgba(255, 255, 255, 0.08)'
                                         }
                                     }}
-                                    onClick={() => {
-                                        router.push('/expenses/category/housing')
-                                    }}
+                                        onClick={() => {
+                                            router.push('/expenses/category/housing')
+                                        }}
                                     ><Box sx={{
                                         width: 80,
                                         height: 80,
@@ -442,9 +444,9 @@ export default function Expenses() {
                                             background: 'rgba(255, 255, 255, 0.08)'
                                         }
                                     }}
-                                    onClick={() => {
-                                        router.push('/expenses/category/other')
-                                    }}
+                                        onClick={() => {
+                                            router.push('/expenses/category/other')
+                                        }}
                                     ><Box sx={{
                                         width: 80,
                                         height: 80,

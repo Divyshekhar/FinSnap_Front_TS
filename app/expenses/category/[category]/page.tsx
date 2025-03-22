@@ -43,7 +43,7 @@ export default function Category() {
 
   const handleDelete = async (transactionId: string) => {
     try {
-      await axios.delete(`${URL}/expense/delete/${transactionId}`, {
+      await axios.delete(`${URL}/delete/${transactionId}`, {
         headers: { Authorization: localStorage.getItem("authToken") },
       });
 
