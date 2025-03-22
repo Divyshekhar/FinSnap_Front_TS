@@ -10,8 +10,8 @@ import { cilBasket, cilBuilding, cilBusAlt, cilCart, cilHospital, cilPizza } fro
 import { useRouter } from 'next/navigation';
 
 
-// const URL = "https://finsnap-back-ts.onrender.com/expense";
-const URL = "http://localhost:5000/expense";
+const URL = "https://finsnap-back-ts.onrender.com/expense";
+// const URL = "http://localhost:5000/expense";
 
 export default function Expenses() {
     const router = useRouter();
