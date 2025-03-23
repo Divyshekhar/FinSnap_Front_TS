@@ -37,9 +37,9 @@ export default function Signin() {
                 email,
                 password
             });
-
             const token = response.data.token;
             localStorage.setItem("authToken", token);
+            window.dispatchEvent(new Event("storage"));
             router.push('/');
         } catch (error) {
             if (axios.isAxiosError(error)) {
