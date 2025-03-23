@@ -22,6 +22,7 @@ export default function Signin() {
     const [password, setPassword] = React.useState("");
     const [showPassword, setShowPassword] = React.useState(false);
     const [error, setError] = React.useState("");
+    const [loading, setLoading] = React.useState(false);
 
     const handleTogglePasswordVisibility = () => {
         setShowPassword((prev) => !prev);
@@ -29,6 +30,7 @@ export default function Signin() {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setLoading(true);
         try {
             const response = await axios.post(`${URL}/user/signup`, {
                 name,
@@ -46,6 +48,9 @@ export default function Signin() {
             } else {
                 console.error("Unexpected error:", error);
             }
+        }
+        finally{
+            setLoading(false);
         }
     };
 
@@ -143,7 +148,14 @@ export default function Signin() {
                         size="large"
                         sx={{ mt: 2 }}
                     >
-                        Sign Up
+                      {loading ? (
+                    <svg
+                        className="animate-spin h-5 w-5 mr-2 border-t-2 border-white border-solid rounded-full"
+                        viewBox="0 0 24 24"
+                    ></svg>
+                ) : (
+                    "Sign Up"
+                )}
                     </Button>
                     <Button onClick={() => { router.push('/signin') }}>Already have an account? Login Here</Button>
                     {error && (
