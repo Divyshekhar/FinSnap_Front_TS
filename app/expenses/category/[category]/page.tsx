@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditModal, { Transaction } from "./EditModal"; // ✅ Import the Edit Modal
-import { format } from "path";
 
 const URL = "https://finsnap-back-ts.onrender.com/expense";
 
