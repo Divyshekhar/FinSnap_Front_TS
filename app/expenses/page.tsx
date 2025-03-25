@@ -445,7 +445,7 @@ export default function Expenses() {
                                         }
                                     }}
                                         onClick={() => {
-                                            router.push('/expenses/category/other')
+                                            router.push('/expenses/category/others')
                                         }}
                                     ><Box sx={{
                                         width: 80,
