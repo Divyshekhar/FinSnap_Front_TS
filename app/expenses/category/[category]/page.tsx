@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditModal, { Transaction } from "./EditModal"; // ✅ Import the Edit Modal
+import { format } from "path";
 
 const URL = "https://finsnap-back-ts.onrender.com/expense";
 
@@ -20,7 +21,10 @@ export default function Category() {
 
   useEffect(() => {
     if (params?.category) {
-      const formattedCategory = params.category.charAt(0).toUpperCase() + params.category.slice(1);
+      let formattedCategory = params.category.charAt(0).toUpperCase() + params.category.slice(1);
+      if(formattedCategory == "Other"){
+        formattedCategory += 's';
+      }
       setCategory(formattedCategory);
       fetchCategoryData(formattedCategory);
     }
