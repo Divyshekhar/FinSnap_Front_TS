@@ -21,7 +21,10 @@ export default function Category() {
 
   useEffect(() => {
     if (params?.category) {
-      const formattedCategory = params.category.charAt(0).toUpperCase() + params.category.slice(1);
+      let formattedCategory = params.category.charAt(0).toUpperCase() + params.category.slice(1);
+      if(formattedCategory == "Other"){
+        formattedCategory += 's';
+      }
       setCategory(formattedCategory);
       fetchCategoryData(formattedCategory);
     }
