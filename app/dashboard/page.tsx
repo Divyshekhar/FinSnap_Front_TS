@@ -180,7 +180,7 @@ export default function Dashboard() {
                                             Net amount after all the income and expenses.
 
                                         </Typography>
-                                        <Typography sx={{ mt: 5, color: "white", fontSize: "20px", fontWeight: "bold" }}>
+                                        <Typography sx={{ mt: {xs: 2, md: 6, sm: 6, lg: 3.6}, color: "white", fontSize: "20px", fontWeight: "bold" }}>
                                             ₹{(income - expense).toLocaleString('en-IN')}
                                         </Typography>
                                     </Paper>
@@ -228,7 +228,7 @@ export default function Dashboard() {
                                             Total amount that you recieved.
 
                                         </Typography>
-                                        <Typography sx={{ mt: 5, color: "white", fontSize: "20px", fontWeight: "bold" }}>
+                                        <Typography sx={{ mt: {xs: 2, md: 6, sm: 6, lg: 3.6}, color: "white", fontSize: "20px", fontWeight: "bold" }}>
                                             ₹{income.toLocaleString('en-IN')}
                                         </Typography>
                                     </Paper>
@@ -277,7 +277,7 @@ export default function Dashboard() {
                                         <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
                                             Total amount which was spent throughout.
                                         </Typography>
-                                        <Typography sx={{ mt: 6, justifyContent: "flex-end", color: "white", fontSize: "20px", fontWeight: "bold" }}>
+                                        <Typography sx={{ mt: {xs: 2, md: 6, sm: 6, lg: 3.6}, justifyContent: "flex-end", color: "white", fontSize: "20px", fontWeight: "bold" }}>
                                             ₹{expense.toLocaleString('en-IN')}
                                         </Typography>
                                     </Paper>
