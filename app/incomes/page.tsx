@@ -214,10 +214,19 @@ export default function Incomes() {
                             </form>
                         </Paper>
                     </Grid>
+
+
+
+
+                    {/* This is the bottom section */}
+
+
+
+
                     <Grid item xs={12} md={12} sx={{ pb: 2, display: "flex", flexDirection: "column" }}>
                         <Paper sx={{
                             background: "rgba(255, 255, 255, 0.05)",
-                            height: { xs: "305vh", sm: "257vh", md: "116vh" },
+                            height: { xs: "265vh", sm: "245vh", md: "120vh", lg: "120vh" },
                             borderRadius: "20px",
                             paddingTop: "10px",
                         }}>
@@ -226,7 +235,7 @@ export default function Incomes() {
                                     <Paper elevation={1} sx={{
                                         width: "80%",
                                         p: 4,
-                                        height: 290,
+                                        height: {xs:"320px", md: 350, sm: 290},
                                         display: 'flex',
                                         flexDirection: 'column',
                                         borderRadius: "20px",
@@ -261,7 +270,7 @@ export default function Incomes() {
                                         <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
                                             Total amount recieved for salary.
                                         </Typography>
-                                        <Typography sx={{ mt: 6, justifyContent: "flex-end", color: "white", fontSize: "20px", fontWeight: "bold" }}>
+                                        <Typography sx={{ mt: {xs: 2, md: 6, sm: 6, lg: 3.6}, justifyContent: "flex-end", color: "white", fontSize: "25px", fontWeight: "bold" }}>
                                             ₹{salaryData.toLocaleString('en-IN')}
                                         </Typography>
                                     </Paper>
@@ -270,7 +279,7 @@ export default function Incomes() {
                                     <Paper elevation={1} sx={{
                                         width: "80%",
                                         p: 4,
-                                        height: 290,
+                                        height: {xs:"320px", md: 350, sm: 290},
                                         display: 'flex',
                                         flexDirection: 'column',
                                         borderRadius: "20px",
@@ -304,7 +313,7 @@ export default function Incomes() {
                                         <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
                                             Total amount earned by freelancing.
                                         </Typography>
-                                        <Typography sx={{ mt: 6, justifyContent: "flex-end", color: "white", fontSize: "20px", fontWeight: "bold" }}>
+                                        <Typography sx={{ mt: {xs: 2, md: 3, sm: 6}, justifyContent: "flex-end", color: "white", fontSize: "25px", fontWeight: "bold" }}>
                                             ₹{freelanceData.toLocaleString('en-IN')}
                                         </Typography>
                                     </Paper>
@@ -313,7 +322,7 @@ export default function Incomes() {
                                     <Paper elevation={1} sx={{
                                         width: "80%",
                                         p: 4,
-                                        height: 290,
+                                        height: {xs:"320px", md: 350, sm: 290},
                                         display: 'flex',
                                         flexDirection: 'column',
                                         borderRadius: "20px",
@@ -347,18 +356,18 @@ export default function Incomes() {
                                         <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
                                             Total amount earned by various business ventures.
                                         </Typography>
-                                        <Typography sx={{ mt: 5, justifyContent: "flex-end", color: "white", fontSize: "20px", fontWeight: "bold" }}>
+                                        <Typography sx={{ mt: {xs: 2, md: 3, sm: 6}, justifyContent: "flex-end", color: "white", fontSize: "25px", fontWeight: "bold" }}>
                                             ₹{businessData.toLocaleString('en-IN')}
                                         </Typography>
                                     </Paper>
                                 </Grid>
                             </Grid>
-                            <Grid container spacing={4} sx={{ mb: 12, marginLeft: "5px", marginTop: "5px" }}>
+                            <Grid container spacing={4} sx={{ mb: 12, marginLeft: "5px", marginTop: "-98px" }}>
                                 <Grid item xs={12} md={4}>
                                     <Paper elevation={1} sx={{
                                         width: "80%",
                                         p: 4,
-                                        height: 290,
+                                        height: {xs:"320px", md: 350, sm: 290},
                                         display: 'flex',
                                         flexDirection: 'column',
                                         borderRadius: "20px",
@@ -392,7 +401,7 @@ export default function Incomes() {
                                         <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
                                             Total amount earned through investments.
                                         </Typography>
-                                        <Typography sx={{ mt: 6, justifyContent: "flex-end", color: "white", fontSize: "20px", fontWeight: "bold" }}>
+                                        <Typography sx={{ mt: {xs: 2, md: 6, sm: 6, lg: 3.6}, justifyContent: "flex-end", color: "white", fontSize: "25px", fontWeight: "bold" }}>
                                             ₹{investmentData.toLocaleString("en-IN")}
                                         </Typography>
                                     </Paper>
@@ -401,7 +410,7 @@ export default function Incomes() {
                                     <Paper elevation={1} sx={{
                                         width: "80%",
                                         p: 4,
-                                        height: 290,
+                                        height: {xs:"320px", md: 350, sm: 290},
                                         display: 'flex',
                                         flexDirection: 'column',
                                         borderRadius: "20px",
@@ -435,7 +444,7 @@ export default function Incomes() {
                                         <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
                                             Total amount which was spent on other things.
                                         </Typography>
-                                        <Typography sx={{ mt: 6, justifyContent: "flex-end", color: "white", fontSize: "20px", fontWeight: "bold" }}>
+                                        <Typography sx={{ mt: {xs: 2, md: 3, sm: 6}, justifyContent: "flex-end", color: "white", fontSize: "25px", fontWeight: "bold" }}>
                                             ₹{otherData.toLocaleString('en-IN')}
                                         </Typography>
                                     </Paper>

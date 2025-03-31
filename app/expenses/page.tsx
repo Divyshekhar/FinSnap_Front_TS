@@ -299,7 +299,7 @@ export default function Expenses() {
                                         <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
                                             Total amount which was spent on healthcare.
                                         </Typography>
-                                        <Typography sx={{ mt: {xs: 2, md: 3, sm: 6}, justifyContent: "flex-end", color: "white", fontSize: "20px", fontWeight: "bold" }}>
+                                        <Typography sx={{ mt: {xs: 2, md: 3, sm: 6}, justifyContent: "flex-end", color: "white", fontSize: "25px", fontWeight: "bold" }}>
                                             ₹{healthData.toLocaleString('en-IN')}
                                         </Typography>
                                     </Paper>
@@ -342,7 +342,7 @@ export default function Expenses() {
                                         <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
                                             Total amount which was spent on transportation.
                                         </Typography>
-                                        <Typography sx={{ mt: {xs: 2, md: 3, sm: 6}, justifyContent: "flex-end", color: "white", fontSize: "20px", fontWeight: "bold" }}>
+                                        <Typography sx={{ mt: {xs: 2, md: 3, sm: 6}, justifyContent: "flex-end", color: "white", fontSize: "25px", fontWeight: "bold" }}>
                                             ₹{transportData.toLocaleString('en-IN')}
                                         </Typography>
                                     </Paper>
@@ -387,7 +387,7 @@ export default function Expenses() {
                                         <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
                                             Total amount which was spent on groceries.
                                         </Typography>
-                                        <Typography sx={{ mt: {xs: 2, md: 6, sm: 6, lg: 3.6}, justifyContent: "flex-end", color: "white", fontSize: "20px", fontWeight: "bold" }}>
+                                        <Typography sx={{ mt: {xs: 2, md: 6, sm: 6, lg: 3.6}, justifyContent: "flex-end", color: "white", fontSize: "25px", fontWeight: "bold" }}>
                                             ₹{groceriesData.toLocaleString('en-IN')}
                                         </Typography>
                                     </Paper>
@@ -430,7 +430,7 @@ export default function Expenses() {
                                         <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
                                             Total amount which was spent on housing.
                                         </Typography>
-                                        <Typography sx={{ mt: {xs: 2, md: 3, sm: 6}, justifyContent: "flex-end", color: "white", fontSize: "20px", fontWeight: "bold" }}>
+                                        <Typography sx={{ mt: {xs: 2, md: 3, sm: 6}, justifyContent: "flex-end", color: "white", fontSize: "25px", fontWeight: "bold" }}>
                                             ₹{housingData.toLocaleString('en-IN')}
                                         </Typography>
                                     </Paper>
@@ -474,7 +474,7 @@ export default function Expenses() {
                                         <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
                                             Total amount which was spent on other things.
                                         </Typography>
-                                        <Typography sx={{ mt: {xs: 2, md: 3, sm: 6}, justifyContent: "flex-end", color: "white", fontSize: "20px", fontWeight: "bold" }}>
+                                        <Typography sx={{ mt: {xs: 2, md: 3, sm: 6}, justifyContent: "flex-end", color: "white", fontSize: "25px", fontWeight: "bold" }}>
                                             ₹{otherData.toLocaleString('en-IN')}
                                         </Typography>
                                     </Paper>
