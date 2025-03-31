@@ -201,11 +201,19 @@ export default function Expenses() {
                             </form>
                         </Paper>
 
-                    </Grid>
+                    </Grid> 
+
+
+
+                    {/* This is the bottom section */}
+
+
+
+
                     <Grid item xs={12} md={12} sx={{ pb: 2, display: "flex", flexDirection: "column" }}>
                         <Paper sx={{
                             background: "rgba(255, 255, 255, 0.05)",
-                            height: { xs: "305vh", sm: "305vh", md: "116vh" },
+                            height: { xs: "313vh", sm: "290vh", md: "120vh", lg: "120vh" },
                             borderRadius: "20px",
                             paddingTop: "10px",
                         }}>
@@ -214,7 +222,7 @@ export default function Expenses() {
                                     <Paper elevation={1} sx={{
                                         width: "80%",
                                         p: 4,
-                                        height: 290,
+                                        height: {xs:"320px", md: 350, sm: 290},
                                         display: 'flex',
                                         flexDirection: 'column',
                                         borderRadius: "20px",
@@ -248,7 +256,7 @@ export default function Expenses() {
                                         <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
                                             Total amount which was spent on food.
                                         </Typography>
-                                        <Typography sx={{ mt: 6, justifyContent: "flex-end", color: "white", fontSize: "20px", fontWeight: "bold" }}>
+                                        <Typography sx={{ mt: {xs: 2, md: 6, sm: 6, lg: 3.6}, justifyContent: "flex-end", color: "white", fontSize: "25px", fontWeight: "bold" }}>
                                             ₹{foodData.toLocaleString('en-IN')}
                                         </Typography>
                                     </Paper>
@@ -257,7 +265,7 @@ export default function Expenses() {
                                     <Paper elevation={1} sx={{
                                         width: "80%",
                                         p: 4,
-                                        height: 290,
+                                        height: {xs:"320px", md: 350, sm: 290},
                                         display: 'flex',
                                         flexDirection: 'column',
                                         borderRadius: "20px",
@@ -291,7 +299,7 @@ export default function Expenses() {
                                         <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
                                             Total amount which was spent on healthcare.
                                         </Typography>
-                                        <Typography sx={{ mt: 6, justifyContent: "flex-end", color: "white", fontSize: "20px", fontWeight: "bold" }}>
+                                        <Typography sx={{ mt: {xs: 2, md: 3, sm: 6}, justifyContent: "flex-end", color: "white", fontSize: "20px", fontWeight: "bold" }}>
                                             ₹{healthData.toLocaleString('en-IN')}
                                         </Typography>
                                     </Paper>
@@ -300,7 +308,7 @@ export default function Expenses() {
                                     <Paper elevation={1} sx={{
                                         width: "80%",
                                         p: 4,
-                                        height: 290,
+                                        height: {xs:"320px", md: 350, sm: 290},
                                         display: 'flex',
                                         flexDirection: 'column',
                                         borderRadius: "20px",
@@ -334,18 +342,18 @@ export default function Expenses() {
                                         <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
                                             Total amount which was spent on transportation.
                                         </Typography>
-                                        <Typography sx={{ mt: 5, justifyContent: "flex-end", color: "white", fontSize: "20px", fontWeight: "bold" }}>
+                                        <Typography sx={{ mt: {xs: 2, md: 3, sm: 6}, justifyContent: "flex-end", color: "white", fontSize: "20px", fontWeight: "bold" }}>
                                             ₹{transportData.toLocaleString('en-IN')}
                                         </Typography>
                                     </Paper>
                                 </Grid>
                             </Grid>
-                            <Grid container spacing={4} sx={{ mb: 12, marginLeft: "5px", marginTop: "5px" }}>
+                            <Grid container spacing={4} sx={{ mb: 12, marginLeft: "5px", marginTop: "-98px" }}>
                                 <Grid item xs={12} md={4}>
                                     <Paper elevation={1} sx={{
                                         width: "80%",
                                         p: 4,
-                                        height: 290,
+                                        height: {xs:"320px", md: 350, sm: 290},
                                         display: 'flex',
                                         flexDirection: 'column',
                                         borderRadius: "20px",
@@ -379,7 +387,7 @@ export default function Expenses() {
                                         <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
                                             Total amount which was spent on groceries.
                                         </Typography>
-                                        <Typography sx={{ mt: 6, justifyContent: "flex-end", color: "white", fontSize: "20px", fontWeight: "bold" }}>
+                                        <Typography sx={{ mt: {xs: 2, md: 6, sm: 6, lg: 3.6}, justifyContent: "flex-end", color: "white", fontSize: "20px", fontWeight: "bold" }}>
                                             ₹{groceriesData.toLocaleString('en-IN')}
                                         </Typography>
                                     </Paper>
@@ -388,7 +396,7 @@ export default function Expenses() {
                                     <Paper elevation={1} sx={{
                                         width: "80%",
                                         p: 4,
-                                        height: 290,
+                                        height: {xs: 325, md: 350, sm: 290},
                                         display: 'flex',
                                         flexDirection: 'column',
                                         borderRadius: "20px",
@@ -406,7 +414,7 @@ export default function Expenses() {
                                         }}
                                     ><Box sx={{
                                         width: 80,
-                                        height: 80,
+                                        height:80,
                                         bgcolor: 'rgba(255, 255, 255, 0.1)',
                                         borderRadius: 2,
                                         display: 'flex',
@@ -422,7 +430,7 @@ export default function Expenses() {
                                         <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
                                             Total amount which was spent on housing.
                                         </Typography>
-                                        <Typography sx={{ mt: 6, justifyContent: "flex-end", color: "white", fontSize: "20px", fontWeight: "bold" }}>
+                                        <Typography sx={{ mt: {xs: 2, md: 3, sm: 6}, justifyContent: "flex-end", color: "white", fontSize: "20px", fontWeight: "bold" }}>
                                             ₹{housingData.toLocaleString('en-IN')}
                                         </Typography>
                                     </Paper>
@@ -431,7 +439,7 @@ export default function Expenses() {
                                     <Paper elevation={1} sx={{
                                         width: "80%",
                                         p: 4,
-                                        height: 290,
+                                        height: {xs:"320px", md: 350, sm: 290},
                                         display: 'flex',
                                         flexDirection: 'column',
                                         borderRadius: "20px",
@@ -447,7 +455,8 @@ export default function Expenses() {
                                         onClick={() => {
                                             router.push('/expenses/category/others')
                                         }}
-                                    ><Box sx={{
+                                    >
+                                        <Box sx={{
                                         width: 80,
                                         height: 80,
                                         bgcolor: 'rgba(255, 255, 255, 0.1)',
@@ -465,7 +474,7 @@ export default function Expenses() {
                                         <Typography sx={{ color: 'rgba(255, 255, 255, 0.7)' }}>
                                             Total amount which was spent on other things.
                                         </Typography>
-                                        <Typography sx={{ mt: 6, justifyContent: "flex-end", color: "white", fontSize: "20px", fontWeight: "bold" }}>
+                                        <Typography sx={{ mt: {xs: 2, md: 3, sm: 6}, justifyContent: "flex-end", color: "white", fontSize: "20px", fontWeight: "bold" }}>
                                             ₹{otherData.toLocaleString('en-IN')}
                                         </Typography>
                                     </Paper>
