@@ -19,6 +19,7 @@ export default function Signin() {
     const router = useRouter();
     const [email, setEmail] = React.useState("");
     const [name, setName] = React.useState("");
+    const [isVisible, setIsVisible] = React.useState(false);
     const [password, setPassword] = React.useState("");
     const [showPassword, setShowPassword] = React.useState(false);
     const [error, setError] = React.useState("");
@@ -53,6 +54,10 @@ export default function Signin() {
             setLoading(false);
         }
     };
+    React.useEffect(() => {
+            setTimeout(() => setIsVisible(true), 100);
+        },[])
+    
 
     return (
         <Box
@@ -63,6 +68,9 @@ export default function Signin() {
                 alignItems: "center",
                 height: "100vh",
                 justifyContent: "center",
+                opacity: isVisible ? 1 : 0,
+                transform: isVisible ? "translateY(0px)" : "translateY(20px)",
+                transition: "opacity 0.8s ease-out, transform 0.8s ease-out",
             }}
         >
             <Paper

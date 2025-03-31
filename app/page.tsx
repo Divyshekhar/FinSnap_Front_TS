@@ -15,6 +15,7 @@ import { useRouter } from 'next/navigation';
 
 function LandingPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const theme = useTheme();
   const router = useRouter();
 
@@ -22,6 +23,7 @@ function LandingPage() {
     const getToken = () => {
       const token = localStorage.getItem("authToken");
       setIsAuthenticated(!!token);
+      setTimeout(() => setIsVisible(true), 100);
     };
 
     getToken();
@@ -39,7 +41,10 @@ function LandingPage() {
       minHeight: '100vh',
       marginTop: "30px",
       background: 'linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%)',
-      py: 8
+      py: 8,
+      opacity: isVisible ? 1 : 0, 
+      transform: isVisible ? "translateY(0px)" : "translateY(20px)",
+      transition: "opacity 0.8s ease-out, transform 0.8s ease-out", 
     }}>
       <Container maxWidth="lg">
         {/* Hero Section */}

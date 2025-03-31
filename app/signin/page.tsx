@@ -23,6 +23,7 @@ export default function Signin() {
     const [showPassword, setShowPassword] = React.useState(false);
     const [error, setError] = React.useState("");
     const [loading, setLoading] = React.useState(false);
+    const [isVisible, setIsVisible] = React.useState(false);
 
     const handleTogglePasswordVisibility = () => {
         setShowPassword((prev) => !prev);
@@ -30,7 +31,7 @@ export default function Signin() {
     React.useEffect(() => {
         const token = localStorage.getItem('authToken');
         if (token) router.push('/dashboard');
-
+        setTimeout(() => setIsVisible(true), 100);
     }, [router])
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -67,6 +68,9 @@ export default function Signin() {
                 alignItems: "center",
                 height: "100vh",
                 justifyContent: "center",
+                opacity: isVisible ? 1 : 0,
+                transform: isVisible ? "translateY(0px)" : "translateY(20px)",
+                transition: "opacity 0.8s ease-out, transform 0.8s ease-out",
             }}
         >
             <Paper
