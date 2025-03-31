@@ -123,10 +123,20 @@ export default function Dashboard() {
 
 
                     </Grid>
+
+
+
+
+                    {/* This is the bottom section */}
+
+
+
+
+
                     <Grid item xs={12} md={12} sx={{ pb: 2 }}>
                         <Paper sx={{
                             background: "rgba(255, 255, 255, 0.05)",
-                            height: { xs: "150vh", sm: "150vh", md: "55vh" },
+                            height: { xs: "175vh", sm: "150vh", md: "65vh", lg: "64vh" },
                             borderRadius: "20px",
                             paddingTop: "10px",
                         }}>
@@ -134,8 +144,8 @@ export default function Dashboard() {
                                 <Grid item xs={12} md={4}>
                                     <Paper elevation={1} sx={{
                                         width: "80%",
+                                        height: {xs:"350px", md: 350, sm: 290},
                                         p: 4,
-                                        height: 290, // Fixed height
                                         display: 'flex',
                                         flexDirection: 'column',
                                         justifyContent: 'space-between',
@@ -179,8 +189,8 @@ export default function Dashboard() {
                                 <Grid item xs={12} md={4}>
                                     <Paper elevation={1} sx={{
                                         width: "80%",
+                                        height: {xs:"350px", md: 350, sm: 290},
                                         p: 4,
-                                        height: 290, // Fixed height
                                         display: 'flex',
                                         flexDirection: 'column',
                                         justifyContent: 'space-between',
@@ -227,9 +237,9 @@ export default function Dashboard() {
                                 <Grid item xs={12} md={4}>
                                     <Paper elevation={1} sx={{
                                         width: "80%",
+                                        height: {xs:"350px", md: 350, sm: 290},
                                         cursor: "pointer",
                                         p: 4,
-                                        height: 290, // Fixed height
                                         display: 'flex',
                                         flexDirection: 'column',
                                         justifyContent: 'space-between',
