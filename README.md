@@ -37,4 +37,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## Backend Repository
 
-(https://github.com/Divyshekhar/finsnap-go)
+https://github.com/Divyshekhar/finsnap-go
