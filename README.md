@@ -20,6 +20,10 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Backend Repository
+
+https://github.com/Divyshekhar/finsnap-go
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
@@ -35,6 +39,4 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
-## Backend Repository
 
-https://github.com/Divyshekhar/finsnap-go
